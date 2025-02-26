@@ -1,0 +1,16 @@
+.table tfoot th, .table thead th{
+    font-weight: 500 !important;
+    color:#fff !important;
+}
+
+.table thead{
+    background-color: #3f51b5 !important;
+}
+
+#table_data_processing{
+    background: transparent !important;
+}
+
+table.dataTable {
+    width: 100% !important;
+}
