@@ -1,16 +1,17 @@
 <?php
 
+use App\Models\TaxLine;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\TaxLineController;
 use App\Http\Controllers\TaxTypeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TaxEntityController;
 use App\Http\Controllers\FinancialAccountController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\TaxLineController;
-use App\Models\TaxLine;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,35 +28,14 @@ Route::get('/', function () {
     return view('layouts/master');
 });
 
-Route::prefix('tax')->group(function () {
-    Route::get('pph-21/list', [TaxLineController::class, 'getListing'])->name('tax_line.listing');
-    Route::resource('pph-21', TaxLineController::class);
-});
 
-/* Master  */
-Route::prefix('master')->group(function () {
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
-    /* Karyawan  */
-    Route::get('employees/list', [EmployeeController::class, 'getListing'])->name('employees.listing');
-    Route::resource('employees', EmployeeController::class);
-
-    /* Jenis Pajak  */
-    Route::get('tax-types/list', [TaxTypeController::class, 'getListing'])->name('tax-types.listing');
-    Route::resource('tax-types', TaxTypeController::class);
-
-    /* Vendor  */
-    Route::get('vendor/list', [VendorController::class, 'getListing'])->name('vendor.listing');
-    Route::resource('vendor', VendorController::class);
-});
-
-/* Jenis Pajak  */
-Route::prefix('admin')->group(function () {
-
-    /* Users  */
-    Route::get('users/list', [UserController::class, 'getListing'])->name('users.listing');
-    Route::resource('users', UserController::class);
-
-    /* Roles  */
-    Route::get('roles/list', [RoleController::class, 'getListing'])->name('roles.listing');
-    Route::resource('roles', RoleController::class);
+// Semua halaman ini hanya bisa diakses jika sudah login
+Route::middleware(['jwt.session'])->group(function () {
+    
+    Route::get('/home', [PageController::class, 'home'])->name('home');
+    Route::get('/about', [PageController::class, 'about'])->name('about');
 });
