@@ -1,28 +1,28 @@
-let token = getCookie("token");
+function checkToken() {
+    let token = getCookie("token");
 
-if (!token) {
-    // Jika tidak ada token, redirect ke login
-    window.location.href = "/login";
-} else {
-    // Jika token ada, cek validitasnya dengan API /me
-    fetch("/api/me", {
-        method: "GET",
-        headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-        },
-    })
-        .then((response) => {
-            if (!response.ok) {
-                document.cookie =
-                    "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                window.location.href = "/login";
-            }
+    if (!token) {
+        window.location.href = "/login";
+    } else {
+       /*  fetch("/api/me", {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + token,
+                "Content-Type": "application/json",
+            },
         })
-        .catch((error) => {
-            console.error("Token validation failed:", error);
-            window.location.href = "/login";
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    document.cookie =
+                        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    window.location.href = "/login";
+                }
+            })
+            .catch((error) => {
+                console.error("Token validation failed:", error);
+                window.location.href = "/login";
+            }); */
+    }
 }
 
 function logout() {
@@ -80,7 +80,14 @@ function data_table(url, json) {
             headers: {
                 Authorization: "Bearer " + token,
             },
-            data: function (d) {},
+            // data: function (d) {},
+            data: function (d) {
+                d.draw = d.draw || 0; // Tambahkan draw untuk request
+            },
+            dataSrc: function (json) {
+                // Pastikan format response sesuai
+                return json.data || [];
+            },
         },
         language: {
             emptyTable:
@@ -151,36 +158,25 @@ function data_table(url, json) {
         .addClass("form-control input-sm ml-0");
 }
 
-function initPage(page) {
-    const currentPage = window.location.pathname.replace(/^\//, '');
-
-    let scriptPath = `/js/${page}.js`;
-    $.getScript(scriptPath)
-        .done(function () {
-            console.log(`Script ${scriptPath} berhasil dimuat.`);
-        })
-        .fail(function (jqxhr, settings, exception) {
-            console.log(`Script ${scriptPath} tidak ditemukan, diabaikan.`);
-        });
-}
-
 function initPage() {
-    const currentPage = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '');
-
+    const currentPage = window.location.pathname
+        .replace(/^\//, "")
+        .replace(/\.html$/, "");
     // Cari script berdasarkan halaman
-    const pageData = pages.find(p => p.page === currentPage);
+    const pageData = pages.find((p) => p.page === currentPage);
+
     console.log(pageData);
 
     if (pageData && pageData.script) {
-        const scriptFile = `/js/${pageData.script}`
+        const scriptFile = `/js/${pageData.script}`;
         $.getScript(scriptFile)
             .done(function () {
-                console.log(`Script ${scriptFile} berhasil dimuat.`);
+                // console.log(`Script ${scriptFile} berhasil dimuat.`);
             })
             .fail(function () {
-                console.log(`Gagal memuat script ${scriptFile}, tetapi tidak akan menampilkan error.`);
+                // console.log(`Gagal memuat script ${scriptFile}, tetapi tidak akan menampilkan error.`);
             });
     } else {
-        console.log(`Halaman ${currentPage} tidak memiliki script yang sesuai.`);
+        console.log(`Page ${currentPage} does not have script.`);
     }
 }

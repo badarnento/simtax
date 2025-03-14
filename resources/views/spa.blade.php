@@ -106,6 +106,7 @@
         console.log("Base URL:", BASE_URL);
 
         $(document).ready(function() {
+            checkToken();
             initPage();
 
             // Tambahkan loading screen & spinner ke dalam body
@@ -118,6 +119,8 @@
 
             $(".nav-link").click(function(e) {
                 e.preventDefault();
+
+                checkToken();
                 let url = $(this).data("url");
 
                 if (!url) {
@@ -127,7 +130,7 @@
 
                 const currentPage = window.location.pathname.replace(/^\//, '');
                 if (url === currentPage) {
-                    return; // Jika halaman yang diklik sama dengan halaman saat ini, hentikan
+                    return;
                 }
 
                 // Tampilkan loading screen
@@ -179,7 +182,6 @@
             };
         });
     </script>
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

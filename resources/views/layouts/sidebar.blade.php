@@ -13,13 +13,18 @@
                     <li class="site-menu-item has-sub">
                         <a href="javascript:void(0)">
                             <i class="site-menu-icon md-money" aria-hidden="true"></i>
-                            <span class="site-menu-title">Data Pajak</span>
+                            <span class="site-menu-title">Coba SPA</span>
                             <span class="site-menu-arrow"></span>
                         </a>
                         <ul class="site-menu-sub">
                             <li class="site-menu-item">
                                 <a class="animsition-link nav-link" href="/about" data-url="about">
-                                    <span class="site-menu-title">PPh 21</span>
+                                    <span class="site-menu-title">About</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link nav-link" href="/product" data-url="product">
+                                    <span class="site-menu-title">Product</span>
                                 </a>
                             </li>
                         </ul>
@@ -33,33 +38,33 @@
                         </a>
                         <ul class="site-menu-sub">
                             <li class="site-menu-item">
-                                <a class="animsition-link nav-link" href="/master/pajak-pph21-bulanan" data-url="product">
+                                <a class="animsition-link nav-link" href="/master/pajak-pph21-bulanan" data-url="master/pajak-pph21-bulanan">
                                 <span class="site-menu-title">Masa Pajak PPh21 Bulanan
                                 </span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/master/kode-objek-pph21">
+                                <a class="animsition-link nav-link" href="/master/kode-objek-pph21" data-url="master/kode-objek-pph21">
                                     <span class="site-menu-title">Kode Objek PPh21</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/master/pegawai">
+                                <a class="animsition-link nav-link" href="/master/pegawai" data-url="master/pegawai">
                                     <span class="site-menu-title">Pegawai</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/master/tax-types">
+                                <a class="animsition-link nav-link" href="/master/tax-types" data-url="master/pegawai">
                                     <span class="site-menu-title">Pemotong</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/master/ptkp">
+                                <a class="animsition-link nav-link" href="/master/ptkp" data-url="master/ptkp">
                                     <span class="site-menu-title">PTKP</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/master/ter">
+                                <a class="animsition-link nav-link" href="/master/ter" data-url="master/ter">
                                     <span class="site-menu-title">TER</span>
                                 </a>
                             </li>
@@ -75,12 +80,12 @@
                         </a>
                         <ul class="site-menu-sub">
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/admin/users">
+                                <a class="animsition-link nav-link" href="/admin/users" data-url="admin/users">
                                     <span class="site-menu-title">Users</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/admin/roles">
+                                <a class="animsition-link nav-link" href="/users" data-url="users">
                                     <span class="site-menu-title">Roles</span>
                                 </a>
                             </li>

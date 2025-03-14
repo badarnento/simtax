@@ -6,24 +6,36 @@ trait ResponseTrait
 {
 	public function successResponse($messages = [], $data = [], $code = 200)
 	{
-		$respone = [
+		// Pisahkan isi 'data' dan sisanya
+		$dataContent = $data['data'] ?? [];
+
+		if (isset($data['data'])) {
+			$dataContent = $data['data'];
+			unset($data['data']);
+		} else {
+			$dataContent = $data;
+			$data = [];
+		}
+
+		$response = [
 			'type'    => 'success',
 			'message' => $messages,
-			'data'    => $data
-		];
+			'data'    => $dataContent instanceof \Illuminate\Support\Collection ? $dataContent->toArray() : $dataContent,
+		] + $data;
 
-		return response()->json($respone, $code);
+		return response()->json($response, $code);
 	}
+
 
 	public function errorResponse($messages = [], $data = [], $code = 500)
 	{
-		$respone = [
+		$response = [
 			'type'    => 'error',
 			'message' => $messages,
 			'data'    => $data
 		];
 
-		return response()->json($respone, $code);
+		return response()->json($response, $code);
 	}
 
 	public function paginateJsonResource($data, $resources)

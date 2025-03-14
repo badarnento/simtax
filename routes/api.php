@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\Master\MasterPegawaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,6 @@ Route::get('/me', [ApiAuthController::class, 'me'])->middleware('jwt.auth');
 
 Route::middleware(['jwt.auth'])->group(function () {
     Route::get('users/list', [UserController::class, 'getListing']);
+
+    Route::get('master/pegawai/list', [MasterPegawaiController::class, 'getListing']);
 });
