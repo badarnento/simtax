@@ -5,7 +5,7 @@
                 <ul class="site-menu" data-plugin="menu">
                     <li class="site-menu-category">General</li>
                     <li class="site-menu-item">
-                        <a class="animsition-link" href="/">
+                        <a class="animsition-link nav-link" href="/home" data-url="home">
                             <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
                             <span class="site-menu-title">Dashboard</span>
                         </a>
@@ -18,7 +18,7 @@
                         </a>
                         <ul class="site-menu-sub">
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/tax/pph-21">
+                                <a class="animsition-link nav-link" href="/about" data-url="about">
                                     <span class="site-menu-title">PPh 21</span>
                                 </a>
                             </li>
@@ -33,27 +33,39 @@
                         </a>
                         <ul class="site-menu-sub">
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/master/employees">
-                                    <span class="site-menu-title">Karyawan</span>
+                                <a class="animsition-link nav-link" href="/master/pajak-pph21-bulanan" data-url="product">
+                                <span class="site-menu-title">Masa Pajak PPh21 Bulanan
+                                </span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                
+                                <a class="animsition-link" href="/master/kode-objek-pph21">
+                                    <span class="site-menu-title">Kode Objek PPh21</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="/master/pegawai">
+                                    <span class="site-menu-title">Pegawai</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
                                 <a class="animsition-link" href="/master/tax-types">
-                                    <span class="site-menu-title">Jenis Pajak</span>
+                                    <span class="site-menu-title">Pemotong</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="/master/vendor">
-                                    <span class="site-menu-title">Vendor</span>
+                                <a class="animsition-link" href="/master/ptkp">
+                                    <span class="site-menu-title">PTKP</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="/master/ter">
+                                    <span class="site-menu-title">TER</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
-<!--                     <div class="icondemo vertical-align-middle">
-                <i class="icon md-account" aria-hidden="true"></i>
-                <div class="icon-title">account</div>
-              </div> -->
+
                     <li class="site-menu-category">Admin</li>
                     <li class="site-menu-item has-sub">
                         <a href="javascript:void(0)">
@@ -74,7 +86,6 @@
                             </li>
                         </ul>
                     </li>
-
 
                 </ul>
             </div>

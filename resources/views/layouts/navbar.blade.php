@@ -30,7 +30,10 @@
                     <div class="dropdown-menu" role="menu">
                         <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
                         <div class="dropdown-divider" role="presentation"></div>
-                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
+                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" onclick="logout()">
+                            <i class="icon md-power" aria-hidden="true"></i> Logout
+                        </a>
+
                     </div>
                 </li>
                 <li class="nav-item dropdown">

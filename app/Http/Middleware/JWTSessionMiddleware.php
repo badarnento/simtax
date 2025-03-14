@@ -15,16 +15,7 @@ class JWTSessionMiddleware
 {
     try {
 
-        // dd($request->cookie('token'), $request->headers->all());
-        // Ambil token dari session atau cookie
-        // $token = session('token') ?? $request->cookie('token');
-        // $token = $request->bearerToken() ?? $request->cookie('jwt_token');
-        $token = Cookie::get('jwt_token');
-        $token = $request->cookie('jwt_token');
-
-        print_r($token);
-
-        die;
+      $token = $_COOKIE['token'];
 
 /*         print_r($token);die;
 
