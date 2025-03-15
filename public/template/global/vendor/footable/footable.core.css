@@ -287,8 +287,8 @@
     cursor: default;
 
     color: #fff;
-    border-color: #3f51b5; 
-    background-color: #3f51b5;
+    border-color: #2f5ea5; 
+    background-color: #2f5ea5;
 }
 .footable > tfoot .pagination > li.disabled > a,
 .footable > tfoot .pagination > li.disabled > a:focus,
@@ -320,7 +320,7 @@
 .footable > tfoot .pagination a:focus,
 .footable > tfoot .pagination a:hover
 {
-    color: #3f51b5;
+    color: #2f5ea5;
     border-color: #e0e0e0; 
     background-color: #eee;
 }

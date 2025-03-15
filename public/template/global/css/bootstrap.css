@@ -261,7 +261,7 @@ a
 {
     text-decoration: none;
 
-    color: #3949ab;
+    color: #2f5ea5;
     background-color: transparent;
 
     -webkit-text-decoration-skip: objects;
@@ -270,7 +270,7 @@ a:hover
 {
     text-decoration: underline; 
 
-    color: #3f51b5;
+    color: #2f5ea5;
 }
 
 a:not([href]):not([tabindex])
@@ -782,7 +782,7 @@ kbd
 
     color: #fff;
     border-radius: .143rem; 
-    background-color: #3f51b5;
+    background-color: #2f5ea5;
 }
 kbd kbd
 {
@@ -3197,7 +3197,7 @@ pre code
 .form-control.focus,
 .form-control:focus
 {
-    border-color: #3f51b5;
+    border-color: #2f5ea5;
     -webkit-box-shadow: none;
             box-shadow: none;
 }
@@ -3713,8 +3713,8 @@ fieldset[disabled] a.btn
 .btn-primary
 {
     color: #fff;
-    border-color: #3f51b5; 
-    background-color: #3f51b5;
+    border-color: #2f5ea5; 
+    background-color: #2f5ea5;
 }
 .btn-primary:hover
 {
@@ -3731,8 +3731,8 @@ fieldset[disabled] a.btn
 .btn-primary.disabled,
 .btn-primary:disabled
 {
-    border-color: #3f51b5; 
-    background-color: #3f51b5;
+    border-color: #2f5ea5; 
+    background-color: #2f5ea5;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3916,16 +3916,16 @@ fieldset[disabled] a.btn
 
 .btn-outline-primary
 {
-    color: #3f51b5;
-    border-color: #3f51b5; 
+    color: #2f5ea5;
+    border-color: #2f5ea5; 
     background-color: transparent;
     background-image: none;
 }
 .btn-outline-primary:hover
 {
     color: #fff;
-    border-color: #3f51b5; 
-    background-color: #3f51b5;
+    border-color: #2f5ea5; 
+    background-color: #2f5ea5;
 }
 .btn-outline-primary:focus,
 .btn-outline-primary.focus
@@ -3936,7 +3936,7 @@ fieldset[disabled] a.btn
 .btn-outline-primary.disabled,
 .btn-outline-primary:disabled
 {
-    color: #3f51b5;
+    color: #2f5ea5;
     background-color: transparent;
 }
 .btn-outline-primary:active,
@@ -3944,8 +3944,8 @@ fieldset[disabled] a.btn
 .show > .btn-outline-primary.dropdown-toggle
 {
     color: #fff;
-    border-color: #3f51b5; 
-    background-color: #3f51b5;
+    border-color: #2f5ea5; 
+    background-color: #2f5ea5;
 }
 
 .btn-outline-secondary
@@ -4122,7 +4122,7 @@ fieldset[disabled] a.btn
 {
     font-weight: 300;
 
-    color: #3949ab;
+    color: #2f5ea5;
     border-radius: 0;
 }
 .btn-link,
@@ -4147,7 +4147,7 @@ fieldset[disabled] a.btn
 {
     text-decoration: underline;
 
-    color: #3f51b5;
+    color: #2f5ea5;
     background-color: transparent;
 }
 .btn-link:disabled
@@ -5106,8 +5106,8 @@ tbody.collapse.show
 .nav-tabs .nav-item.show .nav-link
 {
     color: #fff;
-    border-color: #e0e0e0 #e0e0e0 #3f51b5; 
-    background-color: #3f51b5;
+    border-color: #e0e0e0 #e0e0e0 #2f5ea5; 
+    background-color: #2f5ea5;
 }
 .nav-tabs .dropdown-menu
 {
@@ -5125,7 +5125,7 @@ tbody.collapse.show
 .show .nav-pills .nav-link
 {
     color: #fff;
-    background-color: #3f51b5;
+    background-color: #2f5ea5;
 }
 
 .nav-fill .nav-item
@@ -5940,13 +5940,13 @@ tbody.collapse.show
 
 .card-primary
 {
-    background-color: #3f51b5;
+    background-color: #2f5ea5;
 }
 .card-primary.card-bordered,
 .card-primary .card-header-bordered,
 .card-primary .card-footer-bordered
 {
-    border-color: #3f51b5;
+    border-color: #2f5ea5;
 }
 
 .card-success
@@ -6001,7 +6001,7 @@ tbody.collapse.show
 .card-outline-primary .card-header-bordered,
 .card-outline-primary .card-footer-bordered
 {
-    border-color: #3f51b5;
+    border-color: #2f5ea5;
 }
 
 .card-outline-secondary
@@ -6338,8 +6338,8 @@ tbody.collapse.show
     z-index: 2;
 
     color: #fff;
-    border-color: #3f51b5; 
-    background-color: #3f51b5;
+    border-color: #2f5ea5; 
+    background-color: #2f5ea5;
 }
 
 .page-item.disabled .page-link
@@ -6371,7 +6371,7 @@ tbody.collapse.show
 {
     text-decoration: none;
 
-    color: #3f51b5;
+    color: #2f5ea5;
     border-color: #e0e0e0; 
     background-color: #eee;
 }
@@ -6470,7 +6470,7 @@ a.badge:hover
 
 .badge-primary
 {
-    background-color: #3f51b5;
+    background-color: #2f5ea5;
 }
 .badge-primary[href]:focus,
 .badge-primary[href]:hover
@@ -6735,7 +6735,7 @@ a.badge:hover
 {
     z-index: 2;
 
-    color: #3f51b5;
+    color: #2f5ea5;
     border-color: #0275d8; 
     background-color: transparent;
 }
@@ -7785,7 +7785,7 @@ button.close
 
 .bg-primary
 {
-    background-color: #3f51b5 !important;
+    background-color: #2f5ea5 !important;
 }
 
 a.bg-primary:focus,
@@ -12388,7 +12388,7 @@ a.text-muted:hover
 
 .text-primary
 {
-    color: #3f51b5 !important;
+    color: #2f5ea5 !important;
 }
 
 a.text-primary:focus,

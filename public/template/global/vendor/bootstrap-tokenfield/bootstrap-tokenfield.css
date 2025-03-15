@@ -42,7 +42,7 @@
 }
 .tokenfield.focus
 {
-    border-color: #3f51b5;
+    border-color: #2f5ea5;
     outline: 0;
 }
 .tokenfield .token
@@ -69,7 +69,7 @@
 }
 .tokenfield .token.active
 {
-    border-color: #3949ab;
+    border-color: #2f5ea5;
     border-color: rgba(57, 73, 171, .8);
 }
 .tokenfield .token.duplicate

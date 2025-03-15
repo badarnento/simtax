@@ -56,7 +56,7 @@
 }
 .spinnerUi > input[type='text']:focus
 {
-    border-color: #3f51b5;
+    border-color: #2f5ea5;
     -webkit-box-shadow: none;
             box-shadow: none;
 }
@@ -119,21 +119,21 @@
 .spinnerUi_focus > input[type='text']
 {
     color: #757575 !important;
-    border-color: #3f51b5 !important;
+    border-color: #2f5ea5 !important;
 }
 
 .spinnerUi_focus .spinnerUi-down,
 .spinnerUi_focus .spinnerUi-up
 {
     color: #fff;
-    border-color: #3f51b5 !important;
-    background-color: #3f51b5 !important;
+    border-color: #2f5ea5 !important;
+    background-color: #2f5ea5 !important;
 }
 
 .spinnerUi-down:active,
 .spinnerUi-up:active
 {
-    background-color: #3949ab !important;
+    background-color: #2f5ea5 !important;
 }
 
 .spinnerUi_disabled input,

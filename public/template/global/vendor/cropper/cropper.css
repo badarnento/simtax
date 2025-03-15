@@ -64,7 +64,7 @@
     width: 100%;
     height: 100%; 
 
-    outline: 1px solid #3949ab;
+    outline: 1px solid #2f5ea5;
     outline-color: rgba(57, 73, 171, .75);
 }
 
@@ -165,7 +165,7 @@
 
 .cropper-line
 {
-    background-color: #3949ab;
+    background-color: #2f5ea5;
 }
 .cropper-line.line-e
 {
@@ -210,7 +210,7 @@
     height: 5px;
 
     opacity: .75; 
-    background-color: #3949ab;
+    background-color: #2f5ea5;
 }
 .cropper-point.point-e
 {
@@ -295,7 +295,7 @@
     content: ' ';
 
     opacity: 0; 
-    background-color: #3949ab;
+    background-color: #2f5ea5;
 }
 @media (min-width: 480px)
 {

@@ -127,8 +127,8 @@ div.dataTables_paginate .paginate_button.active > a:hover
     cursor: default;
 
     color: #fff;
-    border-color: #3f51b5; 
-    background-color: #3f51b5;
+    border-color: #2f5ea5; 
+    background-color: #2f5ea5;
 }
 div.dataTables_paginate .paginate_button.disabled > a,
 div.dataTables_paginate .paginate_button.disabled > a:focus,
@@ -160,7 +160,7 @@ div.dataTables_paginate .paginate_button > a
 div.dataTables_paginate .paginate_button > a:focus,
 div.dataTables_paginate .paginate_button > a:hover
 {
-    color: #3f51b5;
+    color: #2f5ea5;
     border-color: #e0e0e0; 
     background-color: #eee;
 }

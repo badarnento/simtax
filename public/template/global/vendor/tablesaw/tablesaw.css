@@ -24,8 +24,8 @@
 
 :root
 {
-    --button-text: #3f51b5;
-    --button-selected-background: #3949ab;
+    --button-text: #2f5ea5;
+    --button-selected-background: #2f5ea5;
     --button-checkbox-selected-background: #283593;
     --button-selected-shadow: rgba(92, 107, 192, .45);
     --button-interaction-shadow: #5c6bc0;
