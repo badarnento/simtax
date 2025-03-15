@@ -10,25 +10,12 @@
                             <span class="site-menu-title">Dashboard</span>
                         </a>
                     </li>
-                   <!--  <li class="site-menu-item has-sub">
-                        <a href="javascript:void(0)">
-                            <i class="site-menu-icon md-money" aria-hidden="true"></i>
-                            <span class="site-menu-title">Coba SPA</span>
-                            <span class="site-menu-arrow"></span>
+                    <li class="site-menu-item">
+                        <a class="animsition-link nav-link" href="#/tax/pph21/bulanan" data-url="home">
+                            <i class="site-menu-icon md-balance" aria-hidden="true"></i>
+                            <span class="site-menu-title">Pajak PPh21 Bulanan</span>
                         </a>
-                        <ul class="site-menu-sub">
-                            <li class="site-menu-item">
-                                <a class="animsition-link nav-link" href="#/about" data-url="about">
-                                    <span class="site-menu-title">About</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
-                                <a class="animsition-link nav-link" href="#/product" data-url="product">
-                                    <span class="site-menu-title">Product</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
+                    </li>
                     <li class="site-menu-category">Master</li>
                     <li class="site-menu-item has-sub">
                         <a href="javascript:void(0)">
@@ -37,12 +24,6 @@
                             <span class="site-menu-arrow"></span>
                         </a>
                         <ul class="site-menu-sub">
-                            <li class="site-menu-item">
-                                <a class="animsition-link nav-link" href="#/master/pajak-pph21-bulanan" data-url="master/pajak-pph21-bulanan">
-                                <span class="site-menu-title">Masa Pajak PPh21 Bulanan
-                                </span>
-                                </a>
-                            </li>
                             <li class="site-menu-item">
                                 <a class="animsition-link nav-link" href="#/master/kode-objek-pph21" data-url="master/kode-objek-pph21">
                                     <span class="site-menu-title">Kode Objek PPh21</span>

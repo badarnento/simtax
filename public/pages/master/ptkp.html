@@ -1,0 +1,28 @@
+<h2>Data PTKP</h2>
+<table
+    class="table table-bordered table-striped table-responsive w-full"
+    cellspacing="0"
+    id="table_data"
+>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th class="text-center">DESKRIPSI</th>
+            <th class="text-center">JENIS TER</th>
+            <th class="text-center">PTKP SEBULAN</th>
+            <th class="text-center">PTKP SETAHUN</th>
+        </tr>
+    </thead>
+</table>
+
+<script>
+    url = "/api/master/ptkp/list";
+    jsonData = [
+        { data: "no", width: "10px", class: "text-center" },
+        { data: "DESKRIPSI" },
+        { data: "JENIS_TER" },
+        { data: "PTKP_SEBULAN" },
+        { data: "PTKP_SETAHUN" },
+    ];
+    data_table(url, jsonData);
+</script>
