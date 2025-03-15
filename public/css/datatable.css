@@ -24,3 +24,55 @@
     overflow-x: auto;
   }
 }
+
+.dataTables_processing {
+	background-color: transparent !important;
+}
+
+.form-material.form-group .form-control-label {
+	padding-top: 5px !important;
+}
+
+.form-horizontal .form-control-label{
+	padding: 0;
+}
+
+a.link-custom{
+	font-size: 18px;
+	font-weight: 500;
+	max-height: 149px;
+}
+
+a.link-custom:hover{
+	background-color: #365390;
+	color: #fff !important;
+}
+
+table.dataTable thead {
+  background-color: #365390
+}
+table.dataTable.dtr-inline thead {
+  background-color: #424242 !important;
+}
+table.dataTable thead tr th{
+  font-weight: 500 !important;
+  color:  #fff !important;
+}
+table.dataTable tbody{
+    color: #504f4f;
+    font-weight: 400;
+}
+table.dataTable td{
+  vertical-align: middle;
+}
+#ms-menu-list{
+  margin: auto;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+	text-align: left;
+}
+div.dataTables_wrapper div.dataTables_filter input, div.dataTables_wrapper div.dataTables_filter select{
+	width: 140px;
+	display: inline-block;
+} 

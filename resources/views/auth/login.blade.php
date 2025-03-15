@@ -17,15 +17,7 @@
   <!-- Plugins -->
   <link rel="stylesheet" href="{{asset('template')}}/global/vendor/animsition/animsition.css">
   <link rel="stylesheet" href="{{asset('template')}}/global/vendor/asscrollable/asScrollable.css">
-  <!-- <link rel="stylesheet" href="{{asset('template')}}/global/vendor/switchery/switchery.css"> -->
-  <!-- <link rel="stylesheet" href="{{asset('template')}}/global/vendor/intro-js/introjs.css"> -->
-  <!-- <link rel="stylesheet" href="{{asset('template')}}/global/vendor/slidepanel/slidePanel.css"> -->
-  <!-- <link rel="stylesheet" href="{{asset('template')}}/global/vendor/flag-icon-css/flag-icon.css"> -->
-  <!-- <link rel="stylesheet" href="{{asset('template')}}/global/vendor/waves/waves.css"> -->
-
-  <link rel="stylesheet" href="{{asset('template')}}global/vendor/toastr/toastr.css">
-  <!-- <link rel="stylesheet" href="{{asset('template')}}/base/assets/examples/css/advanced/toastr.css"> -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link rel="stylesheet" href="{{asset('template')}}/base/assets/examples/css/pages/login-v3.css">
   <!-- Fonts -->
   <link rel="stylesheet" href="{{asset('template')}}/global/fonts/material-design/material-design.min.css">
@@ -57,7 +49,7 @@
       <div class="panel">
         <div class="panel-body">
           <div class="brand">
-            <img class="brand-img" src="{{asset('template')}}/base/assets//images/logo-blue.png" alt="...">
+            <!-- <img class="brand-img" src="{{asset('template')}}/base/assets//images/logo-blue.png" alt="..."> -->
             <h2 class="brand-text font-size-18">SIMTAX</h2>
           </div>
           <form id="loginForm" autocomplete="off">
@@ -98,13 +90,7 @@
   <script src="{{asset('template')}}/global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
   <script src="{{asset('template')}}/global/vendor/asscrollable/jquery-asScrollable.js"></script>
   <script src="{{asset('template')}}/global/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
-  <script src="{{asset('template')}}/global/vendor/waves/waves.js"></script>
   <!-- Plugins -->
-  <script src="{{asset('template')}}/global/vendor/switchery/switchery.min.js"></script>
-  <script src="{{asset('template')}}/global/vendor/intro-js/intro.js"></script>
-  <script src="{{asset('template')}}/global/vendor/screenfull/screenfull.js"></script>
-  <script src="{{asset('template')}}/global/vendor/slidepanel/jquery-slidePanel.js"></script>
-  <script src="{{asset('template')}}/global/vendor/jquery-placeholder/jquery.placeholder.js"></script>
   <!-- Scripts -->
   <script src="{{asset('template')}}/global/js/State.js"></script>
   <script src="{{asset('template')}}/global/js/Component.js"></script>
@@ -123,8 +109,6 @@
   <script src="{{asset('template')}}/base/assets/js/Site.js"></script>
   <script src="{{asset('template')}}/global/js/Plugin/asscrollable.js"></script>
   <script src="{{asset('template')}}/global/js/Plugin/slidepanel.js"></script>
-  <script src="{{asset('template')}}/global/js/Plugin/switchery.js"></script>
-  <script src="{{asset('template')}}/global/js/Plugin/jquery-placeholder.js"></script>
   <script src="{{asset('template')}}/global/js/Plugin/material.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
@@ -139,13 +123,10 @@
   </script>
 
   <!-- Tambahkan Toastr CSS & JS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
   <!-- Tambahkan Toastr CSS & JS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
 
   <script>
     // Ambil token dari cookie
@@ -167,7 +148,7 @@
         })
         .then(response => {
           if (response.ok) {
-            window.location.href = "/home"; // Jika token valid, redirect ke /home
+            window.location.href = "#/";
           }
         })
         .catch(error => {
@@ -183,7 +164,6 @@
       let email = document.getElementById("email").value;
       let password = document.getElementById("password").value;
 
-      // Tambahkan loading screen jika belum ada
       if (!document.getElementById("loading-screen")) {
         document.body.insertAdjacentHTML('beforeend', `
                 <div id="loading-screen">
@@ -210,19 +190,20 @@
         .then(data => {
           if (data.type === "success" && data.data.access_token) {
             let token = data.data.access_token;
-            let expiry = data.data.expiry_in; // Expiry dalam detik
+            let expiry = data.data.expiry_in;
 
-            // Set cookie dengan masa berlaku berdasarkan expiry_in
             let expiryDate = new Date();
-            expiryDate.setTime(expiryDate.getTime() + expiry * 1000); // Convert ke milidetik
+            expiryDate.setTime(expiryDate.getTime() + expiry * 1000);
 
-            document.cookie = `token=${token}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
+            let secureFlag = location.protocol === 'https:' ? '; Secure' : '';
+
+            document.cookie = `token=${token}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax${secureFlag}`;
 
             toastr.success("Login Successful", "Success");
 
             setTimeout(() => {
-              window.location.href = "/home";
-            }, 1000); // Delay biar toastr bisa tampil sebentar
+              window.location.href = "/#/";
+            }, 500)
           } else if (data.type === "error") {
             toastr.error(data.message || "Login Failed", "Error");
           } else {

@@ -3,6 +3,7 @@
     font-weight: 500 !important;
     color: #fff !important;
 }
+
 .table thead {
     background-color: #2f5ea5 !important;
 }
@@ -68,13 +69,15 @@ table.dataTable {
     align-items: center;
 }
 
+/* Saat aktif, loading langsung putih, baru fade out */
 .loading-overlay.active {
-    background-color: #ececec;
+    background-color: #ececec; /* Langsung menjadi putih */
     opacity: 1;
     visibility: visible;
-    transition: none;
+    transition: none; /* Hindari animasi saat muncul */
 }
 
+/* Ketika .active dihapus, fade out terjadi */
 .loading-overlay:not(.active) {
     transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
     opacity: 0;
