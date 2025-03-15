@@ -17,9 +17,30 @@ const Router = {
             callback: () => console.log("Home page loaded"),
         },
         {
+            path: "/tax/pph21/bulanan",
+            title: "Pajak PPh21 Bulanan",
+            template: "tax/pph21/bulanan.html",
+            callback: function () {
+            },
+        },
+        {
             path: "/master/pegawai",
             title: "Master Pegawai",
             template: "master/pegawai.html",
+            callback: function () {
+            },
+        },
+        {
+            path: "/master/ptkp",
+            title: "Master PTKP",
+            template: "master/ptkp.html",
+            callback: function () {
+            },
+        },
+        {
+            path: "/master/ter",
+            title: "Master TER",
+            template: "master/ter.html",
             callback: function () {
             },
         },

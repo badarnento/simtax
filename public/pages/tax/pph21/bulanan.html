@@ -1,0 +1,68 @@
+<h2>Masa Pajak PPh 21 BUlanan</h2>
+<table
+    class="table table-bordered table-striped table-responsive w-full"
+    cellspacing="0"
+    id="table_data"
+>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th class="text-center">Bulan</th>
+            <th class="text-center">Tahun</th>
+            <th class="text-center">Tunjangan Pph</th>
+            <th class="text-center">THR</th>
+            <th class="text-center">Bonus</th>
+            <th class="text-center">Uang Lembur</th>
+            <th class="text-center">Premi Jkk</th>
+            <th class="text-center">Premi Jkm</th>
+            <th class="text-center">Premi Bpjs Kes</th>
+            <th class="text-center">Gross Up</th>
+            <th class="text-center">Penghasilan Bruto</th>
+            <th class="text-center">ID TER</th>
+            <th class="text-center">Pph21 Terutang</th>
+            <th class="text-center">Kategori Ter</th>
+            <th class="text-center">ID Pegawai</th>
+            <th class="text-center">Zakat</th>
+            <th class="text-center">Iuran Pensiun</th>
+            <th class="text-center">Iuran Jht</th>
+            <th class="text-center">Tgl Pemotongan</th>
+            <th class="text-center">Uang Makan</th>
+            <th class="text-center">Tunjangan</th>
+            <th class="text-center">Natura Objek Pph21</th>
+            <th class="text-center">Tantiem Dan Lainnya</th>
+            <th class="text-center">Gaji Pokok</th>
+        </tr>
+    </thead>
+</table>
+
+<script>
+    url = "/api/tax/pph21/bulanan/list";
+    jsonData = [
+        { data: "no", width: "10px", class: "text-center" },
+        { data: "BULAN" },
+        { data: "TAHUN" },
+        { data: "TUNJANGAN_PPH" },
+        { data: "THR" },
+        { data: "BONUS" },
+        { data: "UANG_LEMBUR" },
+        { data: "PREMI_JKK" },
+        { data: "PREMI_JKM" },
+        { data: "PREMI_BPJS_KES" },
+        { data: "GROSS_UP" },
+        { data: "PENGHASILAN_BRUTO" },
+        { data: "ID_TER" },
+        { data: "PPH21_TERUTANG" },
+        { data: "KATEGORI_TER" },
+        { data: "ID_PEGAWAI" },
+        { data: "ZAKAT" },
+        { data: "IURAN_PENSIUN" },
+        { data: "IURAN_JHT" },
+        { data: "TGL_PEMOTONGAN" },
+        { data: "UANG_MAKAN" },
+        { data: "TUNJANGAN" },
+        { data: "NATURA_OBJEK_PPH21" },
+        { data: "TANTIEM_DAN_LAINNYA" },
+        { data: "GAJI_POKOK" },
+    ];
+    data_table(url, jsonData);
+</script>

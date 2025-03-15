@@ -4,7 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\Master\MasterTERController;
 use App\Http\Controllers\Master\MasterPegawaiController;
+use App\Http\Controllers\Master\MasterPTKPController;
+use App\Http\Controllers\TaxPPh21Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +32,8 @@ Route::get('/me', [ApiAuthController::class, 'me'])->middleware('jwt.auth');
 Route::middleware(['jwt.auth'])->group(function () {
     Route::get('users/list', [UserController::class, 'getListing']);
 
+    Route::get('tax/pph21/bulanan/list', [TaxPPh21Controller::class, 'getListing']);
     Route::get('master/pegawai/list', [MasterPegawaiController::class, 'getListing']);
+    Route::get('master/ptkp/list', [MasterPTKPController::class, 'getListing']);
+    Route::get('master/ter/list', [MasterTERController::class, 'getListing']);
 });
