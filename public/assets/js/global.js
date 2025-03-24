@@ -56,6 +56,15 @@ const Global = {
         }, CONFIG.animationSpeed);
     },
 
+    toastNotif: function (messages, type = "success") {
+        if (type == "success") {
+            console.log('sukses nih');
+            toastr.success(messages, "Success", 3);
+        } else {
+            toastr.error(messages, "Error");
+        }
+    },
+
     /**
      * Format date to a readable string
      * @param {string|Date} date - Date to format
@@ -109,11 +118,17 @@ const Global = {
         successCallback = null,
         errorCallback = null
     ) {
+        let fullUrl = CONFIG.getApiUrl(url); // Tambahkan prefix API
+
+        let isFormData = data instanceof FormData;
+
         $.ajax({
-            url: url,
+            url: fullUrl,
             type: method,
-            data: data ? JSON.stringify(data) : null,
-            contentType: "application/json",
+            data: isFormData ? data : JSON.stringify(data),
+            contentType: isFormData ? false : "application/json",
+            processData: !isFormData,
+            cache: false,
             dataType: "json",
             timeout: CONFIG.ajaxTimeout,
             success: function (response) {
@@ -125,7 +140,6 @@ const Global = {
                 if (errorCallback && typeof errorCallback === "function") {
                     errorCallback(xhr, status, error);
                 } else {
-                    // Default error handling
                     Global.showNotification(
                         "An error occurred: " + error,
                         CONSTANTS.MESSAGE.ERROR
@@ -218,11 +232,11 @@ const Global = {
 
     checkToken() {
         let token = getCookie("token");
-    
+
         if (!token) {
             window.location.href = "/login";
         } else {
-           /*  fetch("/api/me", {
+            /*  fetch("/api/v1.0/me", {
                 method: "GET",
                 headers: {
                     Authorization: "Bearer " + token,
@@ -241,5 +255,5 @@ const Global = {
                     window.location.href = "/login";
                 }); */
         }
-    }
+    },
 };

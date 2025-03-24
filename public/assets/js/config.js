@@ -8,7 +8,7 @@ const CONFIG = {
     
     // API settings
     apiUrl: '/api',
-    apiVersion: 'v1',
+    apiVersion: 'v1.0',
     
     // Debug mode
     debug: true,

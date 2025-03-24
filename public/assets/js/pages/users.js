@@ -1,5 +1,5 @@
 
-url = "/api/users/list";
+url = "/api/v1.0/users/list";
 jsonData = [
     { "data": "no", "width":"10px", "class":"text-center"},
     { "data": "name", "width":"200px", "class":"text-left"},

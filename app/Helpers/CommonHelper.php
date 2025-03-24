@@ -4,11 +4,14 @@ namespace App\Helpers;
 
 class CommonHelper
 {
-    /**
-     * Include all .php file under the folder path provided.
-     */
-    public static function thousandFormat($value)
+    
+    public static function thousandFormat($value, $decimal=0)
     {
-        return number_format($value, 0, ',', '.');
+        return number_format($value, $decimal, ',', '.');
+    }
+
+    public static function thousandFormatWithComma($value, $decimal=0)
+    {
+        return number_format($value, $decimal, '.', ',');
     }
 }

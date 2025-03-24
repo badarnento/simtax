@@ -24,16 +24,33 @@ use App\Http\Controllers\TaxPPh21Controller;
     return $request->user();
 }); */
 
-Route::post('/login', [ApiAuthController::class, 'login']);
-Route::post('/logout', [ApiAuthController::class, 'logout'])->middleware('jwt.auth');
-Route::get('/me', [ApiAuthController::class, 'me'])->middleware('jwt.auth');
+Route::prefix('v1.0')->group(function () {
+
+    Route::post('/login', [ApiAuthController::class, 'login']);
+    Route::post('/logout', [ApiAuthController::class, 'logout'])->middleware('jwt.auth');
+    Route::get('/me', [ApiAuthController::class, 'me'])->middleware('jwt.auth');
 
 
-Route::middleware(['jwt.auth'])->group(function () {
-    Route::get('users/list', [UserController::class, 'getListing']);
+    Route::middleware(['jwt.auth'])->group(function () {
+        Route::get('users/list', [UserController::class, 'getListing']);
 
-    Route::get('tax/pph21/bulanan/list', [TaxPPh21Controller::class, 'getListing']);
-    Route::get('master/pegawai/list', [MasterPegawaiController::class, 'getListing']);
-    Route::get('master/ptkp/list', [MasterPTKPController::class, 'getListing']);
-    Route::get('master/ter/list', [MasterTERController::class, 'getListing']);
+        Route::prefix('tax/pph21')->group(function () {
+
+            Route::get('get-tarif', [TaxPPh21Controller::class, 'getTarif']);
+
+            Route::get('bulanan/list', [TaxPPh21Controller::class, 'getListing']);
+            Route::apiResource('bulanan', TaxPPh21Controller::class);
+        });
+
+        Route::prefix('master')->group(function () {
+
+            Route::get('pegawai/list', [MasterPegawaiController::class, 'getListing']);
+            Route::get('ptkp/list', [MasterPTKPController::class, 'getListing']);
+            Route::get('ter/list', [MasterTERController::class, 'getListing']);
+
+            Route::apiResource('pegawai', MasterPegawaiController::class);
+            Route::apiResource('ptkp', MasterPTKPController::class);
+            Route::apiResource('ter', MasterTERController::class);
+        });
+    });
 });

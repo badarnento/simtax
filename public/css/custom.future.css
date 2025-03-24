@@ -1,0 +1,241 @@
+/* ============================= */
+/*         TABLE STYLES          */
+/* ============================= */
+.table tfoot th,
+.table thead th {
+    font-weight: 500 !important;
+    color: #fff !important;
+}
+
+.table thead {
+    background-color: #2f5ea5 !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #ebedf5 !important;
+}
+
+tr.even {
+    background: #eee !important;
+}
+
+th, td {
+    white-space: nowrap;
+}
+
+table.dataTable {
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+div.dataTables_wrapper {
+    margin: 0 auto;
+}
+
+/* ============================= */
+/*       LOADING SPINNER         */
+/* ============================= */
+#loading-screen {
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(105, 105, 105, 0.6);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Spinner Animation */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: #2f5ea5;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ececec;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: none;
+}
+
+/* ============================= */
+/*        NAVIGATION BAR         */
+/* ============================= */
+.site-navbar .navbar-container {
+    background-color: #2f5ea5 !important;
+    padding-left: 0 !important;
+}
+
+.navbar-default .navbar-toolbar .nav-link {
+    color: #fff !important;
+    font-weight: 500 !important;
+}
+
+.navbar-default .navbar-toolbar .nav-link:hover {
+    background: rgba(33, 33, 33, 0.2) !important;
+}
+
+/* Navbar Dropdown */
+li.nav-item.dropdown {
+    border-left: 3px solid #fff;
+    line-height: 30px !important;
+}
+
+/* Navbar Hamburger */
+.navbar-default .hamburger,
+.navbar-default .hamburger .hamburger-bar,
+.navbar-default .hamburger:before,
+.navbar-default .hamburger:after {
+    color: #fff !important;
+    background: #fff !important;
+}
+
+/* ============================= */
+/*          SIDE MENU            */
+/* ============================= */
+.site-menubar {
+    background-color: #2f5ea5 !important;
+}
+
+.site-menu .site-menu-sub,
+.site-menu .site-menu-sub .site-menu-item {
+    background-color: #2f5ea5 !important;
+}
+
+.site-menubar-unfold .site-menu-category {
+    color: #fff !important;
+}
+
+.site-menu .site-menu-sub {
+    padding: 0 !important;
+}
+
+.site-menu-item a {
+    color: #fff !important;
+}
+
+.site-menu-item:hover,
+.site-menu > .site-menu-item.open {
+    background: rgba(33, 33, 33, 0.2) !important;
+}
+
+/* ============================= */
+/*        PAGE CONTENT           */
+/* ============================= */
+.page {
+    background: #ebedf5 !important;
+}
+
+.panel {
+    background: #ffffff !important;
+}
+
+/* ============================= */
+/*          FORMS & INPUTS       */
+/* ============================= */
+.form-group {
+    margin-bottom: 1.129rem !important;
+}
+
+.form-group .form-control-label {
+    padding-top: 5px !important;
+    font-weight: 400;
+}
+
+.form-control {
+    padding: .3rem .5rem;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: #e0e0e0 !important;
+}
+
+/* Select2 Custom Styling */
+.select2-container--default .select2-selection--single .select2-selection__placeholder,
+.select2-container--default .select2-results > .select2-results__options {
+    font-weight: 500;
+}
+
+/* Number Input Alignment */
+.number-input {
+    text-align: right !important;
+}
+
+/* ============================= */
+/*           MODALS              */
+/* ============================= */
+.modal-header {
+    border-radius: .286rem .286rem 0 0;
+    background-color: #ffffff;
+    border-bottom: 2px solid #172f52;
+}
+
+/* Scrollable Modal */
+.modal-dialog.modal-scrollable {
+    overflow-y: initial !important;
+}
+
+.modal-dialog.modal-scrollable .modal-body {
+    height: 80vh;
+    overflow-y: auto;
+}
+
+/* Large Modal for Desktop */
+@media (min-width: 768px) {
+    .modal-lg {
+        max-width: 80%;
+    }
+}
+
+/* ============================= */
+/*          UTILITIES            */
+/* ============================= */
+.spacer-10 {
+    height: 10px;
+}
+
+/* Table Processing Loader */
+#table_data_processing {
+    background: transparent !important;
+}
+
+/* Container Width */
+div.container {
+    width: 80%;
+}
+
+/* Navbar Link Hover */
+.nav-link:focus,
+.nav-link:hover {
+    color: #ff9800 !important;
+    background: none !important;
+}

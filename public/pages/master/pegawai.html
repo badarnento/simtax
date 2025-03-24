@@ -1,51 +1,58 @@
-<h2>Data Pegawai</h2>
-<table
-    class="table table-bordered table-striped table-responsive w-full"
-    cellspacing="0"
-    id="table_data"
->
-    <thead>
-        <tr>
-            <th>No.</th>
-            <th class="text-center">ID_KODE_OBJEK_PPH21</th>
-            <th class="text-center">NAMA</th>
-            <th class="text-center">JENIS_KELAMIN</th>
-            <th class="text-center">JABATAN</th>
-            <th class="text-center">NIK</th>
-            <th class="text-center">TKU_PENERIMA_PENGHASILAN</th>
-            <th class="text-center">PTKP</th>
-            <th class="text-center">ALAMAT</th>
-            <th class="text-center">STATUS_KARYAWAN_RESIDENCE</th>
-            <th class="text-center">NO_PASSPORT</th>
-            <th class="text-center">NEGARA</th>
-            <th class="text-center">KODE_NEGARA</th>
-            <th class="text-center">BULAN_AWAL_PENGHASILAN</th>
-            <th class="text-center">BULAN_AKHIR_PENGHASILAN</th>
-            <th class="text-center">LAMA_BEKERJA</th>
-            <th class="text-center">STATUS_PEGAWAI</th>
-            <th class="text-center">DESKRIPSI_STATUS_PEGWAI</th>
-            <th class="text-center">KODE_FASILITAS</th>
-            <th class="text-center">NAMA_FASILITAS</th>
-            <th class="text-center">KODE_DOKUMEN</th>
-            <th class="text-center">NAMA_DOKUMEN_REFERENSI</th>
-            <th class="text-center">NOMOR_DOKUMEN_REFERENSI</th>
-            <th class="text-center">TGL_DOKUMEN_REFERENSI</th>
-        </tr>
-    </thead>
-</table>
+<div class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions pt-10">
+            <button id="button-add" class="btn btn-primary" data-target="#modal-edit" data-toggle="modal"
+                type="button"><i class="icon md-account-add" aria-hidden="true"></i> Tambah</button>
+        </div>
+        <h3 class="panel-title">Data Pegawai</h3>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped table-responsive w-full" cellspacing="0" id="table_data">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th class="text-center">ID KODE OBJEK PPH21</th>
+                    <th class="text-center">NAMA</th>
+                    <th class="text-center">JENIS KELAMIN</th>
+                    <th class="text-center">JABATAN</th>
+                    <th class="text-center">NIK</th>
+                    <th class="text-center">TKU PENERIMA PENGHASILAN</th>
+                    <th class="text-center">PTKP</th>
+                    <!-- <th class="text-center">ALAMAT</th> -->
+                    <th class="text-center">STATUS KARYAWAN RESIDENCE</th>
+                    <th class="text-center">NO PASSPORT</th>
+                    <th class="text-center">NEGARA</th>
+                    <th class="text-center">KODE NEGARA</th>
+                    <th class="text-center">BULAN AWAL PENGHASILAN</th>
+                    <th class="text-center">BULAN AKHIR PENGHASILAN</th>
+                    <th class="text-center">LAMA BEKERJA</th>
+                    <th class="text-center">STATUS PEGAWAI</th>
+                    <!-- <th class="text-center">DESKRIPSI STATUS PEGWAI</th> -->
+                    <th class="text-center">KODE FASILITAS</th>
+                    <th class="text-center">NAMA FASILITAS</th>
+                    <th class="text-center">KODE DOKUMEN</th>
+                    <th class="text-center">NAMA DOKUMEN REFERENSI</th>
+                    <th class="text-center">NOMOR DOKUMEN REFERENSI</th>
+                    <th class="text-center">TGL DOKUMEN REFERENSI</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
 
 <script>
-    url = "/api/master/pegawai/list";
+    url = "/api/v1.0/master/pegawai/list";
     jsonData = [
-        { data: "no", width: "10px", class: "text-center" },
-        { data: "ID_KODE_OBJEK_PPH21" },
-        { data: "NAMA" },
+        { data: "no", "width": "10px", class: "text-center" },
+        { data: "ID_KODE_OBJEK_PPH21", "visible": false },
+        { data: "NAMA", "width": "200%" },
         { data: "JENIS_KELAMIN" },
         { data: "JABATAN" },
         { data: "NIK" },
         { data: "TKU_PENERIMA_PENGHASILAN" },
         { data: "PTKP" },
-        { data: "ALAMAT", "width": "300px" },
+        // { data: "ALAMAT", "width": "250px" },
         { data: "STATUS_KARYAWAN_RESIDENCE" },
         { data: "NO_PASSPORT" },
         { data: "NEGARA" },
@@ -54,7 +61,7 @@
         { data: "BULAN_AKHIR_PENGHASILAN" },
         { data: "LAMA_BEKERJA" },
         { data: "STATUS_PEGAWAI" },
-        { data: "DESKRIPSI_STATUS_PEGWAI" },
+        // { data: "DESKRIPSI_STATUS_PEGWAI", "width": "250px"  },
         { data: "KODE_FASILITAS" },
         { data: "NAMA_FASILITAS" },
         { data: "KODE_DOKUMEN" },

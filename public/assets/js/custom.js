@@ -1,5 +1,3 @@
-
-
 function logout() {
     let token = getCookie("token");
 
@@ -8,7 +6,7 @@ function logout() {
         return;
     }
 
-    fetch("/api/logout", {
+    fetch("/api/v1.0/logout", {
         method: "POST",
         headers: {
             Authorization: "Bearer " + token,
@@ -38,10 +36,22 @@ function getCookie(name) {
     return match ? match[2] : null;
 }
 
+function reloadTable(id = "table_data") {
+    let table = $(`#${id}`).DataTable();
+    
+    if ($.fn.DataTable.isDataTable(`#${id}`)) {
+        if (table.ajax) {
+            table.ajax.reload(null, false);
+        } else {
+            table.draw(false);
+        }
+    }
+}
+
+
 function data_table(url, json) {
     let token = getCookie("token");
 
-    
     Global.checkToken();
 
     let table = $("#table_data").DataTable({
@@ -63,19 +73,22 @@ function data_table(url, json) {
             },
         },
 
-        language     : {
-            "emptyTable"  : "<span class ='label label-danger'>Data not found!</span>",  
-            "infoEmpty"   : "Data Empty",
-            "processing"  : '<div class="loader vertical-align-middle loader-circle"></div>',
-            "search"      : "_INPUT_"
+        language: {
+            emptyTable:
+                "<span class ='label label-danger'>Data not found!</span>",
+            infoEmpty: "Data Empty",
+            processing:
+                '<div class="loader vertical-align-middle loader-circle"></div>',
+            search: "_INPUT_",
         },
-        "columns": json,
-        "scrollY"          : 500, 
-        "scrollCollapse"   : true, 
-        "scrollX"          : true,
-        "pageLength"       : 10,
-        "ordering"         : false,
-        "bAutoWidth" : true,
+        columns: json,
+        scrollY: 500,
+        scrollCollapse: true,
+        scrollX: true,
+        pageLength: 10,
+        ordering: false,
+        bAutoWidth: true,
+        autoWidth: true,
     });
 
     // Fungsi debounce untuk pencarian
