@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TaxPPh21 extends BaseModel
@@ -10,9 +10,7 @@ class TaxPPh21 extends BaseModel
     use HasFactory;
 
     protected $table = 'MASA_PAJAK_PPH21_BULANAN';
-
     protected $primaryKey = 'ID_MASA_PAJAK';
-
     public static $searchableColumns = [];
 
     protected $fillable = [
@@ -42,87 +40,115 @@ class TaxPPh21 extends BaseModel
         'GAJI_POKOK'
     ];
 
-    /* 
-    
-        [metode-penggajian] => GROSS UP
-    [bulan-awal] => 1
-    [bulan-akhir] => 1
-    [npwp] => 
-    [status-ptkp] => TK/0
-    [gaji_pokok] => 111.111.111.111
-    [tunjangan] => 22.222.222
-    [uang_makan] => 33.333.333
-    [uang_lembur] => 44.444.444
-    [penghasilan_lain] => 555.555.555
-    [tunjangan_pph] => 
-    [premi_bpjs_jkk] => 
-    [premi_bpjs_jkm] => 
-    [premi_bpjs_kesehatan] => 
-    [naturan_pph21] => 999.999.999
-    [tunjangan_hari_raya] => 6.666.666.666
-    [bonus] => 777.777.778
-    [tantiem] => 888.888.888.888
-    */
+    /**
+     * Cast attribute values before saving to database
+     */
+    protected $casts = [
+        'GAJI_POKOK' => 'integer',
+        'TUNJANGAN' => 'integer',
+        'UANG_MAKAN' => 'integer',
+        'UANG_LEMBUR' => 'integer',
+        'BONUS' => 'integer',
+        'TANTIEM_DAN_LAINNYA' => 'integer',
+        'PREMI_JKK' => 'integer',
+        'PREMI_JKM' => 'integer',
+        'PREMI_BPJS_KES' => 'integer',
+        'NATURA_OBJEK_PPH21' => 'integer',
+        'THR' => 'integer',
+        'PENGHASILAN_BRUTO' => 'integer',
+    ];
 
+    /**
+     * Convert currency-like values (with dots) to integer before saving
+     */
+    public function setAttributeValues($key, $value)
+    {
+        $this->attributes[$key] = $value !== "" ? (int) str_replace('.', '', $value) : null;
+    }
 
     public function setGajiPokokAttribute($value)
     {
-        $this->attributes['GAJI_POKOK'] = $value !== "" ? str_replace('.', '', $value) : null;
+        $this->setAttributeValues('GAJI_POKOK', $value);
     }
-
     public function setTunjanganAttribute($value)
     {
-        $this->attributes['TUNJANGAN'] = $value !== "" ? str_replace('.', '', $value) : null;
+        $this->setAttributeValues('TUNJANGAN', $value);
     }
-
+    public function setTunjanganPphAttribute($value)
+    {
+        $this->setAttributeValues('TUNJANGAN_PPH', $value);
+    }
     public function setUangMakanAttribute($value)
     {
-        $this->attributes['UANG_MAKAN'] = $value !== "" ? str_replace('.', '', $value) : null;
+        $this->setAttributeValues('UANG_MAKAN', $value);
     }
-
     public function setUangLemburAttribute($value)
     {
-        $this->attributes['UANG_LEMBUR'] = $value !== "" ? str_replace('.', '', $value) : null;
+        $this->setAttributeValues('UANG_LEMBUR', $value);
     }
-
     public function setBonusAttribute($value)
     {
-        $this->attributes['BONUS'] = $value !== "" ? str_replace('.', '', $value) : null;
+        $this->setAttributeValues('BONUS', $value);
     }
-
     public function setTantiemDanLainnyaAttribute($value)
     {
-        $this->attributes['TANTIEM_DAN_LAINNYA'] = $value !== "" ? str_replace('.', '', $value) : null;
+        $this->setAttributeValues('TANTIEM_DAN_LAINNYA', $value);
     }
-
     public function setPremiJkkAttribute($value)
     {
-        $this->attributes['PREMI_JKK'] = $value !== "" ? (int) str_replace('.', '', $value) : null;
+        $this->setAttributeValues('PREMI_JKK', $value);
     }
-
     public function setPremiJkmAttribute($value)
     {
-        $this->attributes['PREMI_JKM'] = $value !== "" ? (int) str_replace('.', '', $value) : null;
+        $this->setAttributeValues('PREMI_JKM', $value);
     }
-
     public function setPremiBpjsKesAttribute($value)
     {
-        $this->attributes['PREMI_BPJS_KES'] = $value !== "" ? (int) str_replace('.', '', $value) : null;
+        $this->setAttributeValues('PREMI_BPJS_KES', $value);
     }
     public function setNaturaObjekPph21Attribute($value)
     {
-        $this->attributes['NATURA_OBJEK_PPH21'] = $value !== "" ? (int) str_replace('.', '', $value) : null;
+        $this->setAttributeValues('NATURA_OBJEK_PPH21', $value);
     }
-
     public function setThrAttribute($value)
     {
-        $this->attributes['THR'] = $value !== "" ? (int) str_replace('.', '', $value) : null;
+        $this->setAttributeValues('THR', $value);
     }
-
     public function setPenghasilanBrutoAttribute($value)
     {
-        $this->attributes['PENGHASILAN_BRUTO'] = $value !== "" ? (int) str_replace('.', '', $value) : null;
+        $this->setAttributeValues('PENGHASILAN_BRUTO', $value);
     }
 
+    public static function getTarifByGajiPegawai($id_pegawai)
+    {
+        return DB::table('MASTER_PEGAWAI as mp')
+            ->select(
+                'mp.NAMA',
+                'mppb.GAJI_POKOK',
+                'mp.PTKP',
+                DB::raw('COALESCE((mppb.PREMI_BPJS_KES + mppb.PREMI_JKK + mppb.PREMI_JKM), 0) AS Total_PREMI'),
+                DB::raw('COALESCE(mp2.JENIS_TER, "TIDAK ADA") AS JENIS_TER'),
+                DB::raw('COALESCE(mt.TARIF, 0) AS TARIF')
+            )
+            ->leftJoin('MASA_PAJAK_PPH21_BULANAN as mppb', 'mppb.ID_PEGAWAI', '=', 'mp.ID_PEGAWAI')
+            ->leftJoin('MASTER_PTKP as mp2', 'mp2.DESKRIPSI', '=', 'mp.PTKP')
+            ->leftJoin('MASTER_TER as mt', function ($join) {
+                $join->on('mppb.GAJI_POKOK', '>=', DB::raw('CAST(mt.PENGHASILAN_MIN AS UNSIGNED)'))
+                    ->on('mppb.GAJI_POKOK', '<=', DB::raw('CAST(mt.PENGHASILAN_MAX AS UNSIGNED)'))
+                    ->on('mt.LAPISAN', '=', 'mp2.JENIS_TER');
+            })
+            ->where('mp.ID_PEGAWAI', $id_pegawai)
+            ->first();
+    }
+
+    public static function getMasterTerByPegawai($id_pegawai)
+    {
+        return DB::table('MASTER_PTKP as mptkp')
+            ->leftJoin('MASTER_PEGAWAI as mp', 'mptkp.DESKRIPSI', '=', 'mp.PTKP')
+            ->leftJoin('MASTER_TER as mt', 'mptkp.JENIS_TER', '=', 'mt.LAPISAN')
+            ->where('mp.ID_PEGAWAI', $id_pegawai)
+            ->select('mt.*')
+            ->get();
+    }
 
 }

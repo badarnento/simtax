@@ -7,7 +7,6 @@ trait ResponseTrait
 	public function successResponse($messages = [], $data = [], $code = 200)
 	{
 		// Pisahkan isi 'data' dan sisanya
-		$dataContent = $data['data'] ?? [];
 
 		if (isset($data['data'])) {
 			$dataContent = $data['data'];

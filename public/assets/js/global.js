@@ -56,6 +56,15 @@ const Global = {
         }, CONFIG.animationSpeed);
     },
 
+    toastNotif: function (messages, type = "success") {
+        if (type == "success") {
+            console.log('sukses nih');
+            toastr.success(messages, "Success", 3);
+        } else {
+            toastr.error(messages, "Error");
+        }
+    },
+
     /**
      * Format date to a readable string
      * @param {string|Date} date - Date to format

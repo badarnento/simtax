@@ -10,7 +10,7 @@ class BaseDatatableService
     public function getData(Request $request, Builder $query, callable $transformCallback, array $searchableColumns)
     {
         $start = $request->input('start', 0);
-        $length = $request->input('length', 10);
+        $length = $request->input('length', $request->input('per_page', 10));
         $draw = $request->input('draw', 0);
         $searchValue = strtolower($request->input('search.value', ''));
         $number = $start + 1;
@@ -35,6 +35,7 @@ class BaseDatatableService
         return [
             'data' => $data,
             'draw' => $draw,
+            'per_page' => $length,
             'recordsTotal' => $totalRecord,
             'recordsFiltered' => $totalFiltered,
         ];

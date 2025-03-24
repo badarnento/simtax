@@ -62,7 +62,7 @@
     <script src="{{asset('template')}}/global/vendor/datatables.net-select-bs4/dataTables.select.js"></script>
     <script src="{{asset('template')}}/global/vendor/datatables.net-responsive/dataTables.responsive.js"></script>
     <script src="{{asset('template')}}/global/vendor/datatables.net-responsive-bs4/responsive.bootstrap4.js"></script>
-    
+
     <script>
         Config.set('assets', "{{asset('template')}}/base/assets");
     </script>
@@ -70,6 +70,7 @@
     <script src="{{asset('template')}}/base/assets/js/Site.js"></script>
     <script src="{{asset('template')}}/global/js/Plugin/asscrollable.js"></script>
     <script src="{{asset('template')}}/global/js/Plugin/select2.js"></script>
+
 
     <script>
         (function(document, window, $) {
@@ -90,7 +91,7 @@
     <script src="{{asset('assets/js/')}}/app.js"></script>
     <script src="{{asset('assets/js/')}}/custom.js"></script>
 
-<script src="{{asset('js')}}/formatter.js"></script>
+    <script src="{{asset('js')}}/formatter.js"></script>
 
 
 </body>

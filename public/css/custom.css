@@ -174,7 +174,7 @@ div.container {
     margin-bottom: 1.129rem !important;
 }
 .form-control:disabled, .form-control[readonly]{
-    background-color: #e0e0e0 !important;
+    background-color: #e0e0e0;
 }
 .form-group .form-control-label{
     padding-top: 5px !important;
@@ -210,4 +210,20 @@ div.container {
 
 .number-input{
     text-align: right !important;
+}
+
+.select2-container--default .select2-results > .select2-results__options{
+    font-weight: 500;
+}
+
+.sub-title-form{
+    border-bottom:1.5px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+input.disabled-input{
+    background:transparent !important;
+    border:none !important;
+    font-weight:700;
 }

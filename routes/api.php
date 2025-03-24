@@ -34,8 +34,9 @@ Route::prefix('v1.0')->group(function () {
     Route::middleware(['jwt.auth'])->group(function () {
         Route::get('users/list', [UserController::class, 'getListing']);
 
-
         Route::prefix('tax/pph21')->group(function () {
+
+            Route::get('get-tarif', [TaxPPh21Controller::class, 'getTarif']);
 
             Route::get('bulanan/list', [TaxPPh21Controller::class, 'getListing']);
             Route::apiResource('bulanan', TaxPPh21Controller::class);

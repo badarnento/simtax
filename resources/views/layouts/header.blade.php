@@ -31,7 +31,9 @@
     <link rel="stylesheet" href="{{asset('css')}}/modals.min.css">
   <link rel="stylesheet" href="{{asset('template')}}/base/assets/examples/css/forms/advanced.css">
     <link rel="stylesheet" href="{{asset('template')}}/global/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="{{asset('template')}}/global/vendor/toastr/toastr.css">
+    <!-- <link rel="stylesheet" href="{{asset('template')}}/global/vendor/toastr/toastr.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <!-- CSS -->
 
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
