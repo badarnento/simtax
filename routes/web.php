@@ -19,6 +19,10 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+Route::get('/coba', function () {
+    return view('coba');
+})->name('coba');
+
 Route::get('/{any}', function () {
     return view('main');
 })->where('any', '.*');

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +17,6 @@
   <link rel="stylesheet" href="{{asset('template')}}/global/vendor/animsition/animsition.css">
   <link rel="stylesheet" href="{{asset('template')}}/global/vendor/asscrollable/asScrollable.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-  <link rel="stylesheet" href="{{asset('template')}}/base/assets/examples/css/pages/login-v3.css">
   <!-- Fonts -->
   <link rel="stylesheet" href="{{asset('template')}}/global/fonts/material-design/material-design.min.css">
   <!-- <link rel="stylesheet" href="{{asset('template')}}/global/fonts/brand-icons/brand-icons.min.css"> -->
@@ -32,51 +30,35 @@
     <![endif]-->
   <!-- Scripts -->
   <script src="{{asset('template')}}/global/vendor/breakpoints/breakpoints.js"></script>
+  <link rel="stylesheet" href="{{asset('css')}}/login.css">
   <script>
-    // Breakpoints();
+    Breakpoints();
   </script>
-  <link rel="stylesheet" href="{{asset('css')}}/custom.css">
+
+  <!-- <link rel="stylesheet" href="{{asset('css')}}/custom.css"> -->
 
 </head>
 
-<body class="animsition page-login-v3 layout-full">
-  <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-  <!-- Page -->
+<body class="animsition page-login layout-full page-dark">
   <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
     <div class="page-content vertical-align-middle">
-      <div class="panel">
-        <div class="panel-body">
-          <div class="brand">
-            <!-- <img class="brand-img" src="{{asset('template')}}/base/assets//images/logo-blue.png" alt="..."> -->
-            <h2 class="brand-text font-size-18">SIMTAX</h2>
-          </div>
-          <form id="loginForm" autocomplete="off">
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input id="email" type="email" class="form-control" name="email" />
-              <label class="floating-label">Email</label>
-            </div>
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input id="password" type="password" class="form-control" name="password" minlength="8" />
-              <label class="floating-label">Password</label>
-            </div>
-            <!--         <div class="form-group clearfix">
-              <div class="checkbox-custom checkbox-inline checkbox-primary checkbox-lg float-left">
-                <input type="checkbox" id="inputCheckbox" name="remember">
-                <label for="inputCheckbox">Remember me</label>
-              </div>
-              <a class="float-right" href="forgot-password.html">Forgot password?</a>
-            </div> -->
-            <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Sign in</button>
-          </form>
-          <!-- <p>Still no account? Please go to <a href="register-v3.html">Sign up</a></p> -->
+      <div class="brand">
+        <h2 class="brand-text font-size-18">SIMTAX</h2>
         </div>
-      </div>
+      <form id="loginForm" autocomplete="off">
+        <div class="form-group form-material floating" data-plugin="formMaterial">
+          <input id="email" type="email" class="form-control empty" id="inputEmail" name="email">
+          <!-- <label class="floating-label" for="inputEmail">Email</label> -->
+        </div>
+        <div class="form-group form-material floating" data-plugin="formMaterial">
+          <input id="password" type="password" class="form-control empty" id="inputPassword" name="password" minlength="8" >
+          <!-- <label class="floating-label" for="inputPassword">Password</label> -->
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+      </form>
       <footer class="page-copyright page-copyright-inverse">
-        <!-- <p>WEBSITE BY amazingSurge</p> -->
         <p>© 2025. All RIGHT RESERVED.</p>
-      </footer>
+        </footer>
     </div>
   </div>
   <!-- End Page -->
@@ -220,6 +202,15 @@
           });
         });
     });
+  </script>
+
+  <script>
+$(document).ready(function () {
+  $("#email").val('langgraini@example.com').trigger("input");
+  $("#password").val('password').trigger("input");
+});
+
+
   </script>
 
 </body>

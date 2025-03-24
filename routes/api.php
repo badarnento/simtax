@@ -33,7 +33,15 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('users/list', [UserController::class, 'getListing']);
 
     Route::get('tax/pph21/bulanan/list', [TaxPPh21Controller::class, 'getListing']);
-    Route::get('master/pegawai/list', [MasterPegawaiController::class, 'getListing']);
-    Route::get('master/ptkp/list', [MasterPTKPController::class, 'getListing']);
-    Route::get('master/ter/list', [MasterTERController::class, 'getListing']);
+
+    Route::prefix('master')->group(function () {
+
+        Route::get('pegawai/list', [MasterPegawaiController::class, 'getListing']);
+        Route::get('ptkp/list', [MasterPTKPController::class, 'getListing']);
+        Route::get('ter/list', [MasterTERController::class, 'getListing']);
+
+        Route::apiResource('pegawai', MasterPegawaiController::class);
+        Route::apiResource('ptkp', MasterPTKPController::class);
+        Route::apiResource('ter', MasterTERController::class);
+    });
 });

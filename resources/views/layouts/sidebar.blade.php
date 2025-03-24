@@ -11,7 +11,7 @@
                         </a>
                     </li>
                     <li class="site-menu-item">
-                        <a class="animsition-link nav-link" href="#/tax/pph21/bulanan" data-url="home">
+                        <a class="animsition-link nav-link" href="#/tax/pph21/bulanan" data-url="home" title="Pajak PPh21 Bulanan">
                             <i class="site-menu-icon md-balance" aria-hidden="true"></i>
                             <span class="site-menu-title">Pajak PPh21 Bulanan</span>
                         </a>

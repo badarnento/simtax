@@ -36,11 +36,8 @@
             <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
                 <li class="nav-item dropdown">
                     <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
-                        data-animation="scale-up" role="button">
-                        <span class="avatar avatar-online">
-                            <img src="{{asset('template')}}/global/portraits/5.jpg" alt="...">
-                            <i></i>
-                        </span>
+                        data-animation="scale-up" role="button" style="line-height: 30px;">
+                        Rudi Habibi
                     </a>
                     <div class="dropdown-menu" role="menu">
                         <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>

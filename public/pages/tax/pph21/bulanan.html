@@ -1,39 +1,477 @@
-<h2>Masa Pajak PPh 21 BUlanan</h2>
-<table
-    class="table table-bordered table-striped table-responsive w-full"
-    cellspacing="0"
-    id="table_data"
->
-    <thead>
-        <tr>
-            <th>No.</th>
-            <th class="text-center">Bulan</th>
-            <th class="text-center">Tahun</th>
-            <th class="text-center">Tunjangan Pph</th>
-            <th class="text-center">THR</th>
-            <th class="text-center">Bonus</th>
-            <th class="text-center">Uang Lembur</th>
-            <th class="text-center">Premi Jkk</th>
-            <th class="text-center">Premi Jkm</th>
-            <th class="text-center">Premi Bpjs Kes</th>
-            <th class="text-center">Gross Up</th>
-            <th class="text-center">Penghasilan Bruto</th>
-            <th class="text-center">ID TER</th>
-            <th class="text-center">Pph21 Terutang</th>
-            <th class="text-center">Kategori Ter</th>
-            <th class="text-center">ID Pegawai</th>
-            <th class="text-center">Zakat</th>
-            <th class="text-center">Iuran Pensiun</th>
-            <th class="text-center">Iuran Jht</th>
-            <th class="text-center">Tgl Pemotongan</th>
-            <th class="text-center">Uang Makan</th>
-            <th class="text-center">Tunjangan</th>
-            <th class="text-center">Natura Objek Pph21</th>
-            <th class="text-center">Tantiem Dan Lainnya</th>
-            <th class="text-center">Gaji Pokok</th>
-        </tr>
-    </thead>
-</table>
+<div class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions pt-10">
+            <button id="button-add" class="btn btn-primary" data-target="#modal-select-employee" data-toggle="modal"
+                type="button">
+                <i class="icon md-account-add" aria-hidden="true"></i> Input
+            </button>
+        </div>
+        <h3 class="panel-title">Masa Pajak PPh 21 BUlanan</h3>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped table-responsive w-full" cellspacing="0" id="table_data">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th class="text-center">Bulan</th>
+                    <th class="text-center">Tahun</th>
+                    <th class="text-center">Tunjangan Pph</th>
+<!--                     <th class="text-center">THR</th>
+                    <th class="text-center">Bonus</th>
+                    <th class="text-center">Uang Lembur</th>
+                    <th class="text-center">Premi Jkk</th>
+                    <th class="text-center">Premi Jkm</th>
+                    <th class="text-center">Premi Bpjs Kes</th> -->
+                    <th class="text-center">Gross Up</th>
+                    <th class="text-center">Penghasilan Bruto</th>
+                    <!-- <th class="text-center">ID TER</th> -->
+                    <th class="text-center">Pph21 Terutang</th>
+                    <th class="text-center">Kategori Ter</th>
+                    <th class="text-center">ID Pegawai</th>
+                    <!-- <th class="text-center">Zakat</th> -->
+                    <!-- <th class="text-center">Iuran Pensiun</th> -->
+                    <!-- <th class="text-center">Iuran Jht</th> -->
+                    <th class="text-center">Tgl Pemotongan</th>
+                    <!-- <th class="text-center">Uang Makan</th> -->
+                    <!-- <th class="text-center">Tunjangan</th> -->
+                    <!-- <th class="text-center">Natura Objek Pph21</th> -->
+                    <!-- <th class="text-center">Tantiem Dan Lainnya</th> -->
+                    <th class="text-center">Gaji Pokok</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<style>
+    .premi-bpjs{
+        cursor: pointer;
+    }
+
+</style>
+
+
+<div class="modal fade" id="modal-select-employee" aria-hidden="true" aria-labelledby="modalSelectEmployeeLabel"
+    role="dialog">
+    <div class="modal-dialog modal-simple">
+        <form class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Pilih Pegawai</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel-body">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <select id="employee-select" class="form-control"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal modal-slide-from-bottom" id="modal-premi-bpjs" aria-hidden="true" aria-labelledby="modalPremiBPJSLabel"
+    role="dialog">
+    <div class="modal-dialog modal-simple">
+        <form id="form-premi-bpjs" class="modal-content form-horizontal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Premi BPJS Di Bayar Perusahaan</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel-body">
+
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label">BPJS TK JHT</label>
+                        <div class="col-md-3">
+                            <input type="text" id="premi_bpjs_tk_jht_percent" name="premi_bpjs_tk_jht_percent" class="form-control w-full percent-input"
+                                placeholder="0,00 %" autocomplete="off" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control w-full" id="premi_bpjs_tk_jht"
+                            name="premi_bpjs_tk_jht" name="premi_bpjs_tk_jht"
+                            name="premi_bpjs_tk_jht" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label">BPJS TK JKK</label>
+                        <div class="col-md-3">
+                            <input type="text" id="premi_bpjs_tk_jkk_perecent" name="premi_bpjs_tk_jkk_perecent" class="form-control w-full percent-input"
+                                placeholder="0,00 %" autocomplete="off" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control w-full" id="premi_bpjs_tk_jkk"
+                                name="premi_bpjs_tk_jkk" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label">BPJS TK JKM</label>
+                        <div class="col-md-3">
+                            <input type="text" id="premi_bpjs_tk_jkm_perecent" name="premi_bpjs_tk_jkm_perecent" class="form-control w-full percent-input"
+                                placeholder="0,00 %" autocomplete="off" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control w-full" id="premi_bpjs_tk_jkm"
+                                name="premi_bpjs_tk_jkm" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label">BPJS TK JP</label>
+                        <div class="col-md-3">
+                            <input type="text" id="premi_bpjs_tk_jp_perecent" class="form-control w-full percent-input"
+                                placeholder="0,00 %" autocomplete="off" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control w-full" id="premi_bpjs_tk_jp" name="premi_bpjs_tk_jp"
+                                readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label">BPJS Kesehatan</label>
+                        <div class="col-md-3">
+                            <input type="text" id="premi_bpjs_kesehatan_perecent"
+                                class="form-control w-full percent-input" placeholder="0,00 %" autocomplete="off" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control w-full" id="premi_bpjs_kesehatan"
+                                name="premi_bpjs_kesehatan" readonly />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-warning">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-edit" aria-hidden="true" aria-labelledby="modalEditLabel" role="dialog">
+    <div class="modal-dialog modal-simple modal-lg modal-scrollable">
+        <form id="form-edit" class="modal-content form-horizontal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Input Masa Pajak Bulanan PPh 21</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4 class="font-weight-500">Data Karyawan</h4>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Nama</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="nama" name="nama" disabled />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Metode Penggajian</label>
+                                <div class="col-md-6">
+                                    <select class="form-control" id="metode-penggajian" name="metode-penggajian">
+                                        <option value="GROSS UP">
+                                            GROSS UP
+                                        </option>
+                                        <option value="NETT">NETT</option>
+                                        <option value="MIXED">MIXED</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Masa Penghasilan</label>
+                                <div class="col-md-6 d-flex">
+                                    <select class="form-control col-md-8" id="bulan-awal" name="bulan-awal">
+                                        <option value="1">Januari</option>
+                                        <option value="2">Februari</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">Mei</option>
+                                        <option value="6">Juni</option>
+                                        <option value="7">Juli</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                    <span class="px-2 align-self-center">s.d.</span>
+                                    <select class="form-control col-md-8" id="bulan-akhir" name="bulan-akhir">
+                                        <option value="1">Januari</option>
+                                        <option value="2">Februari</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">Mei</option>
+                                        <option value="6">Juni</option>
+                                        <option value="7">Juli</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                    <span class="px-2 align-self-center font-weight-500">2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">NIK</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="nik" name="nik" disabled />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">NPWP</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="npwp" name="npwp" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Status PTKP</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="status-ptkp" name="status-ptkp"
+                                        readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer-10"></div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4 class="font-weight-500 text-center">
+                                Penghasilan Teratur
+                            </h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="font-weight-400">
+                                Penghasilan Teratur
+                            </h4>
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Gaji Pokok</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="gaji_pokok"
+                                        name="gaji_pokok" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Tunjangan</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="tunjangan"
+                                        name="tunjangan" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Uang Makan</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="uang_makan"
+                                        name="uang_makan" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Uang Lembur</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="uang_lembur"
+                                        name="uang_lembur" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Penghasilan Lainnya</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="penghasilan_lain"
+                                        name="penghasilan_lain" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Tunjangan PPH</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="tunjangan_pph"
+                                        name="tunjangan_pph" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Premi BPJSTK JKK</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input premi-bpjs" placeholder="Click to input" id="premi_bpjs_jkk"
+                                        name="premi_bpjs_jkk" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Premi BPJSTK JKM</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input premi-bpjs" placeholder="Click to input" id="premi_bpjs_jkm"
+                                        name="premi_bpjs_jkm" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Premi BPJS Kesehatan</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input premi-bpjs" placeholder="Click to input" id="premi_bpjs_kesehatan"
+                                        name="premi_bpjs_kesehatan" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Naturan Obyek PPh Pasal 21</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="naturan_pph21"
+                                        name="naturan_pph21" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label"><strong>JUMLAH PENGHASILAN
+                                        TERATUR</strong></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="jumlah_penghasilan_teratur"
+                                        name="jumlah_penghasilan_teratur" disabled />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="font-weight-400">
+                                Penghasilan Tidak Teratur
+                            </h4>
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Tunjangan Hari Raya (THR)</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="tunjangan_hari_raya"
+                                        name="tunjangan_hari_raya" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Bonus</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="bonus" name="bonus" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Tantiem, Jasa Produksi, dan lainnya</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="tantiem" name="tantiem" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label"><strong>JUMLAH PENGHASILAN TIDAK
+                                        TERATUR</strong></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="jumlah_penghasilan_teratur"
+                                        name="jumlah_penghasilan_teratur" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-warning">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#button-add").on("click", function () {
+        /*    $("#modal-edit-label").html("Input Masa Pajak Bulana PPh 21");
+   
+           form = $("#form-edit")[0];
+           form.reset(); */
+    });
+    let formDataPremi = {};
+
+
+    $("#premi_bpjs_tk_jkk_perecent").on("change", function (e) {
+        let value = $(this).val().replace('%', '').trim(); // Hapus % dan spasi
+        console.log(value);
+        let premi_bpjs_tk_jkk_perecent = $("#gaji_pokok").val() * (this).val().replace(/\./g, '');
+        console.log(premi_bpjs_tk_jkk_perecent);
+        $("#premi_bpjs_tk_jkk_perecent").val(premi_bpjs_tk_jkk_perecent);
+    });
+
+    $("#form-premi-bpjs").on("submit", function (e) {
+        e.preventDefault(); // Mencegah form submit secara default
+        
+        // Ambil semua nilai input yang memiliki atribut name
+        $(this).serializeArray().forEach(function (item) {
+            formDataPremi[item.name] = item.value;
+        });
+        console.log(formDataPremi);
+        $("#premi_bpjs_jkk").val(formDataPremi[premi_bpjs_tk_jkk_perecent])
+
+        $("#modal-premi-bpjs").modal("hide");
+
+    });
+
+    $("#form-edit").on("submit", function (e) {
+        if (!e.isDefaultPrevented()) {
+            form = $("#form-edit")[0];
+            data = new FormData(form);
+            console.log(formDataPremi);
+
+            $.ajax({
+                url: "api/master/pegawai",
+                type: "POST",
+                enctype: "multipart/form-data",
+                data: data,
+                beforeSend: function () {
+                    // customLoading("show");
+                },
+                processData: false,
+                contentType: false,
+                cache: false,
+                dataType: "json",
+                success: function (result) {
+                    console.lg(result)
+                   /*  console.log(result);
+                    form.reset();
+                    $("#modal-edit").modal("hide");
+                    customLoading("hide");
+
+                    if (result.status == true) {
+                        table.ajax.reload(null, false);
+                        customNotif("Success", result.messages, "success");
+                    } else {
+                        customNotif("Failed", result.messages, "error");
+                    } */
+                },
+            });
+        }
+        e.preventDefault();
+    });
+</script>
+
 
 <script>
     url = "/api/tax/pph21/bulanan/list";
@@ -42,27 +480,103 @@
         { data: "BULAN" },
         { data: "TAHUN" },
         { data: "TUNJANGAN_PPH" },
-        { data: "THR" },
+     /*   { data: "THR" },
         { data: "BONUS" },
         { data: "UANG_LEMBUR" },
-        { data: "PREMI_JKK" },
+         { data: "PREMI_JKK" },
         { data: "PREMI_JKM" },
-        { data: "PREMI_BPJS_KES" },
+        { data: "PREMI_BPJS_KES" }, */
         { data: "GROSS_UP" },
         { data: "PENGHASILAN_BRUTO" },
-        { data: "ID_TER" },
+        // { data: "ID_TER" },
         { data: "PPH21_TERUTANG" },
         { data: "KATEGORI_TER" },
         { data: "ID_PEGAWAI" },
-        { data: "ZAKAT" },
+/*         { data: "ZAKAT" },
         { data: "IURAN_PENSIUN" },
-        { data: "IURAN_JHT" },
+        { data: "IURAN_JHT" }, */
         { data: "TGL_PEMOTONGAN" },
-        { data: "UANG_MAKAN" },
+     /*    { data: "UANG_MAKAN" },
         { data: "TUNJANGAN" },
         { data: "NATURA_OBJEK_PPH21" },
-        { data: "TANTIEM_DAN_LAINNYA" },
+        { data: "TANTIEM_DAN_LAINNYA" }, */
         { data: "GAJI_POKOK" },
     ];
     data_table(url, jsonData);
+</script>
+<script>
+    $(document).ready(function () {
+        $("#employee-select").select2({
+            placeholder: "Ketik Nama atau NIK",
+            width: "100%",
+            ajax: {
+                url: "/api/master/pegawai",
+                dataType: "json",
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data.data.map((item) => ({
+                            id: item.ID_PEGAWAI,
+                            text: `${item.NAMA} - ${item.NIK}`,
+                            data: item,
+                        })),
+                    };
+                },
+            },
+        });
+
+        $("#employee-select").on("select2:select", function (e) {
+            let selectedData = e.params.data.data;
+
+            $("#id").val(selectedData.ID_PEGAWAI);
+            $("#nama").val(selectedData.NAMA);
+            $("#nik").val(selectedData.NIK);
+            $("#npwp").val(selectedData.NO_PASSPORT || "");
+            $("#punya-npwp").val(selectedData.NO_PASSPORT ? "YA" : "TIDAK");
+            $("#status-ptkp").val(selectedData.PTKP);
+            $("#metode-penggajian").val("GROSS UP");
+
+            $("#modal-select-employee").modal("hide");
+            $("#modal-edit").modal("show");
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let inputPercent = document.getElementById("percent");
+
+        inputPercent.addEventListener("input", function () {
+            let value = parseFloat(inputPercent.value);
+
+            // Pastikan angka tetap dalam batas 0-100
+            if (isNaN(value) || value < 0) {
+                inputPercent.value = 0;
+            } else if (value > 100) {
+                inputPercent.value = 100;
+            } else {
+                inputPercent.value = value.toFixed(2);
+            }
+        });
+    });
+</script>
+
+<script src="../../../js/formatter.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $(".premi-bpjs").on("click", function () {
+            console.log('clicked')
+            
+            $('#modal-edit').modal('hide'); // Tutup modal-edit
+            $('#modal-premi-bpjs').modal('show'); // Buka modal-premi-bpjs setelah modal-edit tertutup
+            
+        });
+
+
+        // Saat modal-premi-bpjs ditutup, buka kembali modal-edit
+        $('#modal-premi-bpjs').on('hidden.bs.modal', function () {
+            $('#modal-edit').modal('show');
+        });
+    });
+
 </script>

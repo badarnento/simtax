@@ -84,3 +84,129 @@ table.dataTable {
 .table-striped tbody tr:nth-of-type(odd) {
     background-color: #ebedf5 !important;
 }
+
+.site-menubar {
+    background-color: #2f5ea5 !important;
+}
+.site-menu .site-menu-sub .site-menu-item {
+    background-color: #2f5ea5 !important;
+}
+.site-menubar-unfold .site-menu-category {
+    color: #fff !important;
+}
+.site-navbar .navbar-container {
+    background-color: #2f5ea5 !important;
+    padding-left: 0 !important;
+}
+.navbar-default .hamburger .hamburger-bar,
+.navbar-default .hamburger:after,
+.navbar-default .hamburger:before {
+    color: #fff !important;
+}
+.navbar-default .hamburger:before,
+.navbar-default .hamburger .hamburger-bar,
+.navbar-default .hamburger:after {
+    background: #fff !important;
+}
+
+.site-menu .site-menu-sub {
+    padding: 0 !important;
+}
+.site-menu-item:hover {
+    background: rgba(33, 33, 33, 0.2) !important;
+}
+.site-menu > .site-menu-item.open {
+    background: rgba(33, 33, 33, 0.2) !important;
+}
+.site-menu-item a {
+    color: #fff !important;
+}
+.nav-link:focus,
+.nav-link:hover {
+    color: #ff9800 !important;
+    background: none !important;
+}
+
+.page {
+    background: #ebedf5 !important;
+}
+
+.panel {
+    background: #ffffff !important;
+}
+li.nav-item.dropdown {
+    border-left: 3px solid #fff;
+    line-height: 30px !important;
+}
+.navbar-default .navbar-toolbar .nav-link {
+    color: #fff !important;
+    font-weight: 500 !important;
+}
+
+.navbar-default .navbar-toolbar .nav-link:hover {
+    background: rgba(33, 33, 33, 0.2) !important;
+}
+
+tr.even {
+    background: #eee !important;
+}
+
+th,
+td {
+    white-space: nowrap;
+}
+div.dataTables_wrapper {
+    margin: 0 auto;
+}
+
+div.container {
+    width: 80%;
+}
+
+.modal-header{
+    border-radius:.286rem .286rem 0 0;
+    background-color:#ffffff;
+    border-bottom: 2px solid #172f52;
+}
+
+.form-group{
+    margin-bottom: 1.129rem !important;
+}
+.form-control:disabled, .form-control[readonly]{
+    background-color: #e0e0e0 !important;
+}
+.form-group .form-control-label{
+    padding-top: 5px !important;
+    font-weight: 400; 
+}
+
+.spacer-10{
+    height: 10px;
+}
+
+/* Important part */
+.modal-dialog.modal-scrollable{
+    overflow-y: initial !important
+}
+.modal-dialog.modal-scrollable .modal-body{
+    height: 80vh;
+    overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+    .modal-lg {
+        max-width: 80%;
+    }
+}
+
+.form-control{
+    padding: .3rem .5rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder{
+    font-weight: 500;
+}
+
+.number-input{
+    text-align: right !important;
+}

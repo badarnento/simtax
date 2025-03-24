@@ -76,6 +76,7 @@ function data_table(url, json) {
         "pageLength"       : 10,
         "ordering"         : false,
         "bAutoWidth" : true,
+        "autoWidth" : true,
     });
 
     // Fungsi debounce untuk pencarian
