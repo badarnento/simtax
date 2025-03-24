@@ -121,7 +121,7 @@
 
     if (token) {
       // Coba validasi token dengan API /me
-      fetch("/api/me", {
+      fetch("/api/v1.0/me", {
           method: "GET",
           headers: {
             "Authorization": "Bearer " + token,
@@ -158,7 +158,7 @@
       loadingScreen.style.display = "flex";
       $(loadingScreen).hide().fadeIn(200);
 
-      fetch("/api/login", {
+      fetch("/api/v1.0/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

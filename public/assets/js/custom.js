@@ -8,7 +8,7 @@ function logout() {
         return;
     }
 
-    fetch("/api/logout", {
+    fetch("/api/v1.0/logout", {
         method: "POST",
         headers: {
             Authorization: "Bearer " + token,

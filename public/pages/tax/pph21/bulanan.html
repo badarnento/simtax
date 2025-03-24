@@ -434,7 +434,38 @@
 
     });
 
+
     $("#form-edit").on("submit", function (e) {
+        e.preventDefault();
+
+        let form = $("#form-edit")[0];
+        let formData = new FormData(form);
+
+        Global.ajax(
+            "tax/pph21/bulanan",
+            "POST",
+            formData,
+            function (result) {
+                console.log(result);
+                /* form.reset();
+                $("#modal-edit").modal("hide");
+
+                if (result.status == true) {
+                    table.ajax.reload(null, false);
+                    customNotif("Success", result.messages, "success");
+                } else {
+                    customNotif("Failed", result.messages, "error");
+                } */
+            },
+            function (xhr, status, error) {
+                console.error("Error:", error);
+                // customNotif("Error", "Terjadi kesalahan saat menyimpan data", "error");
+            }
+        );
+    });
+
+
+    $("#form-edit2ad").on("submit", function (e) {
         if (!e.isDefaultPrevented()) {
             form = $("#form-edit")[0];
             data = new FormData(form);
@@ -474,7 +505,7 @@
 
 
 <script>
-    url = "/api/tax/pph21/bulanan/list";
+    url = "/api/v1.0/tax/pph21/bulanan/list";
     jsonData = [
         { data: "no", width: "10px", class: "text-center" },
         { data: "BULAN" },
@@ -510,7 +541,7 @@
             placeholder: "Ketik Nama atau NIK",
             width: "100%",
             ajax: {
-                url: "/api/master/pegawai",
+                url: "/api/v1.0/master/pegawai",
                 dataType: "json",
                 delay: 250,
                 processResults: function (data) {

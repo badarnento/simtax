@@ -51,9 +51,4 @@ class MasterPegawaiController extends Controller
 
         return $this->successResponse('Successfully Requested', $pegawaiData);
     }
-
-    public function store(Request $request){
-
-        print_r($request->all());
-    }
 }
