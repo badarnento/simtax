@@ -1,0 +1,267 @@
+window.tarifPPh = [];
+
+$(document).on(
+    "change",
+    "#gaji_pokok, #tunjangan, #uang_makan, #uang_lembur, #penghasilan_lain, #naturan_pph21, #premi_bpjs_kesehatan_percent, #metode_penggajian, [id^=premi_bpjs_tk_][id$=_percent]",
+    updatePenghasilan
+);
+$(document).on(
+    "change",
+    "#tunjangan_hari_raya, #bonus, #tantiem",
+    setJumlahPenghasilanTidakTeratur
+);
+
+$(document).on(
+    "change",
+    "#iuran_zakat, #iuran_bpjs_kesehatan_percent, [id^=iuran_bpjs_tk_][id$=_percent]",
+    updatePotonganPenghasilan
+);
+
+function updatePenghasilan() {
+    setPremiBpjsTk();
+    setJumlahPenghasilanTeratur();
+    setJumlahPenghasilanBruto();
+}
+
+function updatePotonganPenghasilan() {
+    setIuranBpjsTk();
+    setPPh21Terutang();
+}
+
+function setPPh21Terutang() {
+    let total = sumValues([
+        "#iuran_zakat",
+        "#iuran_pensiun_bpjs_tk_jp",
+        "#iuran_pensiun_bpjs_tk_jht",
+    ]);
+
+    $("#jumlah_pengurang").val(total);
+}
+
+function setJumlahPenghasilanBruto() {
+    let bruto = sumValues([
+        "#jumlah_penghasilan_teratur",
+        "#jumlah_penghasilan_tidak_teratur",
+    ]);
+    $("#jumlah_penghasilan_bruto").val(formatNumber(bruto));
+}
+
+function setJumlahPenghasilanTidakTeratur() {
+    let total = sumValues(["#tunjangan_hari_raya", "#bonus", "#tantiem"]);
+    $("#jumlah_penghasilan_tidak_teratur").val(formatNumber(total));
+}
+
+function setJumlahPenghasilanTeratur() {
+    let total = sumValues([
+        "#gaji_pokok",
+        "#tunjangan",
+        "#uang_makan",
+        "#uang_lembur",
+        "#penghasilan_lain",
+        "#premi_bpjs_jkk",
+        "#premi_bpjs_jkm",
+        "#premi_bpjs_kesehatan",
+        "#naturan_pph21",
+    ]);
+    let tunjangan_pph = hitungTunjanganPPh(total);
+
+    $("#tunjangan_pph").val(formatNumber(tunjangan_pph));
+    $("#jumlah_penghasilan_teratur").val(formatNumber(total + tunjangan_pph));
+}
+
+function hitungTunjanganPPh(totalPenghasilan) {
+    let isGross = $("#metode_penggajian").val();
+    if (isGross === "0") {
+        return 0;
+    }
+
+    if (!totalPenghasilan || !window.tarifPPh.length) return 0;
+
+    let tarifData =
+        window.tarifPPh.find(
+            (t) =>
+                totalPenghasilan >= t.PENGHASILAN_MIN &&
+                totalPenghasilan <= t.PENGHASILAN_MAX
+        ) || {};
+    let tarif = (parseFloat(tarifData.TARIF) || 0) / 100;
+
+    $("#id_ter").val(tarifData.ID_TER || "");
+    return Math.floor((totalPenghasilan * tarif) / (1 - tarif));
+}
+
+function setIuranBpjsTk() {
+    let gajiPokok = parseNumber($("#gaji_pokok").val());
+    ["jht", "jp"].forEach((type) =>
+        updateIuran(`iuran_bpjs_tk_${type}`, gajiPokok)
+    );
+}
+
+function setPremiBpjsTk() {
+    let gajiPokok = parseNumber($("#gaji_pokok").val());
+    ["jht", "jkk", "jkm", "jp"].forEach((type) =>
+        updatePremi(`premi_bpjs_tk_${type}`, gajiPokok)
+    );
+}
+
+function updatePremi(id, gajiPokok) {
+    let percent = parsePercent($(`#${id}_percent`).val());
+    let premi = calculatePremi(gajiPokok, percent);
+    $(`#${id}`).val(formatNumber(premi));
+
+    if (id == "premi_bpjs_tk_jkk") {
+        $(`#premi_bpjs_jkk`).val(formatNumber(premi));
+    } else if (id == "premi_bpjs_tk_jkm") {
+        $(`#premi_bpjs_jkm`).val(formatNumber(premi));
+    }
+
+    percent = parsePercent($(`#premi_bpjs_kesehatan_percent`).val());
+    premi = calculatePremi(gajiPokok, percent);
+    $(`#premi_bpjs_kesehatan`).val(formatNumber(premi));
+    $(`#premi_bpjs_kesehatan_info`).val(formatNumber(premi));
+}
+function updateIuran(id, gajiPokok) {
+    let percent = parsePercent($(`#${id}_percent`).val());
+    let iuran = calculatePremi(gajiPokok, percent);
+    $(`#${id}`).val(formatNumber(iuran));
+
+    if (id == "iuran_bpjs_tk_jht") {
+        $(`#iuran_pensiun_bpjs_tk_jht`).val(formatNumber(iuran));
+    } else if (id == "iuran_bpjs_tk_jp") {
+        $(`#iuran_pensiun_bpjs_tk_jp`).val(formatNumber(iuran));
+    }
+
+    percent = parsePercent($(`#iuran_bpjs_kesehatan_percent`).val());
+    iuran = calculatePremi(gajiPokok, percent);
+    $(`#iuran_bpjs_kesehatan`).val(formatNumber(iuran));
+}
+
+function calculatePremi(gajiPokok, percent) {
+    return (gajiPokok * percent) / 100;
+}
+
+function sumValues(fields) {
+    return fields.reduce((sum, id) => sum + parseNumber($(id).val()), 0);
+}
+
+function parseNumber(value) {
+    return parseFloat((value || "0").replace(/\./g, "").trim()) || 0;
+}
+
+function parsePercent(value) {
+    return (
+        parseFloat((value || "0").replace(",", ".").replace("%", "").trim()) ||
+        0
+    );
+}
+
+function formatNumber(value) {
+    return value.toLocaleString("id-ID", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    });
+}
+
+$("#form-premi-bpjs").on("submit", function (e) {
+    e.preventDefault();
+    $("#modal-premi-bpjs").modal("hide");
+});
+
+$("#form-iuran-bpjs").on("submit", function (e) {
+    e.preventDefault();
+    $("#modal-iuran-bpjs").modal("hide");
+});
+
+$("#form-edit").on("submit", function (e) {
+    e.preventDefault();
+    let formData = new FormData(this);
+    Global.ajax("tax/pph21/bulanan", "POST", formData, handleFormResponse);
+});
+
+function handleFormResponse(result) {
+    if (result.type === "success") {
+        reloadTable();
+        Global.toastNotif(result.message);
+        $("#modal-edit").modal("hide");
+        $("#form-edit")[0].reset();
+    } else {
+        Global.toastNotif(result.message);
+    }
+}
+
+let url = "/api/v1.0/tax/pph21/bulanan/list";
+let jsonData = [
+    { data: "no", width: "10px", class: "text-center" },
+    { data: "MASA_PAJAK" },
+    { data: "TAHUN_PAJAK" },
+    { data: "NAMA", width: "80%" },
+    { data: "NIK" },
+    { data: "NPWP" },
+    { data: "KATEGORI_TER" },
+    { data: "GROSS_UP" },
+    { data: "GAJI_POKOK" },
+    { data: "TUNJANGAN_PPH" },
+    { data: "PENGHASILAN_BRUTO" },
+];
+data_table(url, jsonData);
+
+$(document).ready(function () {
+    setupEmployeeSelect();
+    setupModalHandlers();
+});
+
+function setupEmployeeSelect() {
+    $("#employee-select")
+        .select2({
+            placeholder: "Ketik Nama atau NIK",
+            width: "100%",
+            ajax: {
+                url: "/api/v1.0/master/pegawai",
+                dataType: "json",
+                delay: 250,
+                processResults: (data) => ({
+                    results: data.data.map((item) => ({
+                        id: item.ID_PEGAWAI,
+                        text: `${item.NAMA} - ${item.NIK}`,
+                        data: item,
+                    })),
+                }),
+            },
+        })
+        .on("select2:select", function (e) {
+            let data = e.params.data.data;
+            $("#id_pegawai").val(data.ID_PEGAWAI);
+            $("#nama").val(data.NAMA);
+            $("#nik").val(data.NIK);
+            $("#npwp").val(data.NPWP || "");
+            $("#status-ptkp").val(data.PTKP);
+            Global.ajax(
+                `tax/pph21/get-tarif?id_pegawai=${data.ID_PEGAWAI}`,
+                "GET",
+                null,
+                (result) => {
+                    if (result.type === "success")
+                        window.tarifPPh = result.data;
+                }
+            );
+            $("#modal-select-employee").modal("hide");
+            $("#modal-edit").modal("show");
+        });
+}
+
+function setupModalHandlers() {
+    $(".premi-bpjs, .btn-premi-bpjs-edit").on("click", function () {
+        $("#modal-edit").modal("hide");
+        $("#modal-premi-bpjs").modal("show");
+    });
+    $("#modal-premi-bpjs").on("hidden.bs.modal", function () {
+        $("#modal-edit").modal("show");
+    });
+
+    $(".iuran-bpjs, .btn-iuran-bpjs-edit").on("click", function () {
+        $("#modal-edit").modal("hide");
+        $("#modal-iuran-bpjs").modal("show");
+    });
+    $("#modal-iuran-bpjs").on("hidden.bs.modal", function () {
+        $("#modal-edit").modal("show");
+    });
+}
