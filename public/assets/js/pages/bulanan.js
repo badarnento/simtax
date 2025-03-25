@@ -35,7 +35,7 @@ function setPPh21Terutang() {
         "#iuran_pensiun_bpjs_tk_jht",
     ]);
 
-    $("#jumlah_pengurang").val(total);
+    $("#jumlah_pengurang").val(formatNumber(total));
 }
 
 function setJumlahPenghasilanBruto() {
@@ -63,17 +63,17 @@ function setJumlahPenghasilanTeratur() {
         "#premi_bpjs_kesehatan",
         "#naturan_pph21",
     ]);
-    let tunjangan_pph = hitungTunjanganPPh(total);
+    let isGross = $("#metode_penggajian").val();
+    let hitungTunjanganPph = hitungTunjanganPPh(total);
+    let tunjangan_pph = (isGross === "0") ? 0 : hitungTunjanganPph;
 
     $("#tunjangan_pph").val(formatNumber(tunjangan_pph));
+    $("#jumlah_pph21_terutang").val(formatNumber(tunjangan_pph));
+    
     $("#jumlah_penghasilan_teratur").val(formatNumber(total + tunjangan_pph));
 }
 
 function hitungTunjanganPPh(totalPenghasilan) {
-    let isGross = $("#metode_penggajian").val();
-    if (isGross === "0") {
-        return 0;
-    }
 
     if (!totalPenghasilan || !window.tarifPPh.length) return 0;
 
@@ -86,6 +86,12 @@ function hitungTunjanganPPh(totalPenghasilan) {
     let tarif = (parseFloat(tarifData.TARIF) || 0) / 100;
 
     $("#id_ter").val(tarifData.ID_TER || "");
+
+    console.log(tarifData.TARIF)
+    console.log(tarifData.LAPISAN)
+    $("#tarif_ter").val(tarifData.TARIF);
+    $("#kategori_ter").val(tarifData.LAPISAN);
+
     return Math.floor((totalPenghasilan * tarif) / (1 - tarif));
 }
 
@@ -192,15 +198,15 @@ let url = "/api/v1.0/tax/pph21/bulanan/list";
 let jsonData = [
     { data: "no", width: "10px", class: "text-center" },
     { data: "MASA_PAJAK" },
-    { data: "TAHUN_PAJAK" },
-    { data: "NAMA", width: "80%" },
-    { data: "NIK" },
-    { data: "NPWP" },
-    { data: "KATEGORI_TER" },
-    { data: "GROSS_UP" },
-    { data: "GAJI_POKOK" },
-    { data: "TUNJANGAN_PPH" },
-    { data: "PENGHASILAN_BRUTO" },
+    { data: "TAHUN_PAJAK", class: "text-center" },
+    { data: "NAMA", width: "100px" },
+    { data: "NIK", width: "100px" },
+    { data: "NPWP", width: "150px" },
+    { data: "KATEGORI_TER", class: "text-center" },
+    { data: "GROSS_UP", class: "text-center" },
+    { data: "GAJI_POKOK", class: "text-right" },
+    { data: "TUNJANGAN_PPH", class: "text-right" },
+    { data: "PENGHASILAN_BRUTO", class: "text-right" },
 ];
 data_table(url, jsonData);
 
@@ -250,6 +256,7 @@ function setupEmployeeSelect() {
 
 function setupModalHandlers() {
     $(".premi-bpjs, .btn-premi-bpjs-edit").on("click", function () {
+
         $("#modal-edit").modal("hide");
         $("#modal-premi-bpjs").modal("show");
     });
@@ -265,3 +272,5 @@ function setupModalHandlers() {
         $("#modal-edit").modal("show");
     });
 }
+
+

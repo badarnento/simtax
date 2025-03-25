@@ -1,20 +1,5 @@
-.table tfoot th,
-.table thead th {
-    font-weight: 500 !important;
-    color: #fff !important;
-}
-.table thead {
-    background-color: #2f5ea5 !important;
-}
 
-#table_data_processing {
-    background: transparent !important;
-}
 
-table.dataTable {
-    width: 100% !important;
-    overflow: hidden !important;
-}
 
 #loading-screen {
     /* position: fixed;
@@ -83,7 +68,46 @@ table.dataTable {
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #ebedf5 !important;
+    background-color: #ebedf5;
+}
+
+.dataTable th, .dataTable td {
+    padding: 12px 20px;
+}
+
+.table tfoot th,
+.table thead th {
+    font-weight: 500 !important;
+    color: #fff !important;
+}
+.table thead {
+    background-color: #2f5ea5 !important;
+}
+
+#table_data_processing {
+    background: transparent !important;
+}
+
+table.dataTable {
+    width: 100% !important;
+}
+
+@media (min-width: 768px) { /* Hanya untuk layar MD ke atas */
+    table.dataTable {
+        overflow: hidden !important;
+    }
+}
+
+table.dataTable > tbody{
+    font-weight: 400;
+}
+
+.dataTable tbody tr:hover {
+    background-color: #ccc !important;
+}
+#table_data {
+    width: 100% !important;
+    table-layout: fixed;
 }
 
 .site-menubar {
@@ -164,33 +188,34 @@ div.container {
     width: 80%;
 }
 
-.modal-header{
-    border-radius:.286rem .286rem 0 0;
-    background-color:#ffffff;
+.modal-header {
+    border-radius: 0.286rem 0.286rem 0 0;
+    background-color: #ffffff;
     border-bottom: 2px solid #172f52;
 }
 
-.form-group{
+.form-group {
     margin-bottom: 1.129rem !important;
 }
-.form-control:disabled, .form-control[readonly]{
+.form-control:disabled,
+.form-control[readonly] {
     background-color: #e0e0e0;
 }
-.form-group .form-control-label{
+.form-group .form-control-label {
     padding-top: 5px !important;
-    font-weight: 400; 
+    font-weight: 400;
 }
 
-.spacer-10{
+.spacer-10 {
     height: 10px;
 }
 
 /* Important part */
-.modal-dialog.modal-scrollable{
-    overflow-y: initial !important
+.modal-dialog.modal-scrollable {
+    overflow-y: initial !important;
 }
-.modal-dialog.modal-scrollable .modal-body{
-    height: 80vh;
+.modal-dialog.modal-scrollable .modal-body {
+    height: 75vh;
     overflow-y: auto;
 }
 
@@ -200,30 +225,79 @@ div.container {
     }
 }
 
-.form-control{
-    padding: .3rem .5rem;
+.form-control {
+    padding: 0.3rem 0.5rem;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__placeholder{
+.select2-container--default
+    .select2-selection--single
+    .select2-selection__placeholder {
     font-weight: 500;
 }
 
-.number-input{
+.number-input {
     text-align: right !important;
 }
 
-.select2-container--default .select2-results > .select2-results__options{
+.select2-container--default .select2-results > .select2-results__options {
     font-weight: 500;
 }
 
-.sub-title-form{
-    border-bottom:1.5px solid #ccc;
+
+.modal-footer{
+    padding: 20px;
+    border-top: 2px solid #172f52;
+}
+.sub-title-form {
+    border-bottom: 1.5px solid #ccc;
     padding-bottom: 5px;
     margin-bottom: 20px;
 }
 
-input.disabled-input{
-    background:transparent !important;
-    border:none !important;
-    font-weight:700;
+input.disabled-input {
+    background: transparent !important;
+    border: none !important;
+    font-weight: 700;
+}
+
+.premi-bpjs,
+.iuran-bpjs {
+    cursor: pointer;
+    outline: none;
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+    outline: none !important;
+    border: none !important;
+    padding-right: 2.5rem;
+}
+
+.btn-premi-bpjs-edit,
+.btn-iuran-bpjs-edit {
+    border-radius: unset;
+    border-top-right-radius: 0.215rem;
+    border-bottom-right-radius: 0.215rem;
+    border: unset;
+    background: #dfdfdf !important;
+    position: absolute;
+    right: 1rem;
+    top: 0;
+}
+
+.btn-premi-bpjs-edit.focus,
+.btn-premi-bpjs-edit:focus,
+.btn-premi-bpjs-edit:hover,
+.btn-iuran-bpjs-edit.focus,
+.btn-iuran-bpjs-edit:focus,
+.btn-iuran-bpjs-edit:hover {
+    border-color: unset !important;
+    background: #e0e0e0 !important;
+    color: unset !important;
+}
+
+.color-white{
+    color:#fff !important;
+}
+
+.dataTables_length{
+    float:left;
 }
