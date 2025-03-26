@@ -7,6 +7,7 @@ const CONFIG = {
     version: '1.0.0',
     
     // API settings
+    webUrl: '/#',
     apiUrl: '/api',
     apiVersion: 'v1.0',
     
@@ -30,4 +31,5 @@ const CONFIG = {
     getApiUrl: function(endpoint) {
         return this.apiUrl + '/' + this.apiVersion + '/' + endpoint;
     }
+
 };

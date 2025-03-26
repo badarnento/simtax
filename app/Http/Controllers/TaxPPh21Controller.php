@@ -43,6 +43,96 @@ class TaxPPh21Controller extends Controller
         return $this->successResponse('Successfully Requested', collect($data));
     }
 
+    public function show(MasaPajakPph21View $bulanan)
+    {
+        $data = collect($bulanan)->map(function ($value, $key) {
+            // Field yang akan diformat sebagai angka dengan pemisah ribuan
+            $formatThousandFields = [
+                'GAJI_POKOK',
+                'UANG_MAKAN',
+                'UANG_LEMBUR',
+                'TUNJANGAN',
+                'TUNJANGAN_PPH',
+                'THR',
+                'BONUS',
+                'PENGHASILAN_BRUTO',
+                'PREMI_JKK',
+                'PREMI_JKM',
+                'PREMI_BPJS_KES',
+                'PPH21_TERUTANG',
+                'ZAKAT',
+                'IURAN_PENSIUN',
+                'IURAN_JHT',
+                'NATURA_OBJEK_PPH21',
+                'TANTIEM_DAN_LAINNYA'
+            ];
+
+            // Field yang tetap dalam format asli meskipun numerik
+            $excludeNumericFormat = ['NIK', 'NPWP', 'ID_PEGAWAI', 'ID_MASA_PAJAK', 'ID_TER'];
+
+            // Jika field adalah 1 atau 0, ubah menjadi "Ya" atau "Tidak"
+            if (in_array($key, ['GROSS_UP']) && ($value === 1 || $value === 0)) {
+                return $value === 1 ? 'Ya' : 'Tidak';
+            }
+
+            // Jika nilai adalah 0, ubah menjadi '-'
+            if ($value === 0) {
+                return '-';
+            }
+
+            // Jika field masuk dalam daftar format thousand separator
+            if (in_array($key, $formatThousandFields) && is_numeric($value) && $value > 0) {
+                return CommonHelper::thousandFormat($value);
+            }
+
+            // Format tanggal dari yyyy-mm-dd menjadi dd-mm-yyyy
+            if (in_array($key, ['TGL_PEMOTONGAN']) && !empty($value)) {
+                return date('d-m-Y', strtotime($value));
+            }
+
+            // Jika field termasuk dalam daftar yang harus dikecualikan, kembalikan dalam format asli
+            if (in_array($key, $excludeNumericFormat)) {
+                return (string) $value; // Pastikan tetap string untuk ID atau kode unik
+            }
+
+            return $value;
+        });
+
+        return $this->successResponse('Successfully Requested', $data);
+    }
+
+
+    public function shosssw(MasaPajakPph21View $bulanan)
+    {
+        $data = collect($bulanan)->map(function ($value, $key) {
+            // Jika nilai adalah 1 atau 0, ubah menjadi "Ya" atau "Tidak"
+            if (in_array($key, ['GROSS_UP']) && ($value === 1 || $value === 0)) {
+                return $value === 1 ? 'Ya' : 'Tidak';
+            }
+
+            // Jika nilai adalah 0, ubah menjadi '-'
+            if ($value === 0) {
+                return '-';
+            }
+
+            // Jika nilai lebih dari 0, format dengan thousand separator
+            if (is_numeric($value) && $value > 0) {
+                return number_format($value, 0, ',', '.');
+            }
+
+            // Format tanggal dari yyyy-mm-dd menjadi dd-mm-yyyy
+            if (in_array($key, ['TGL_PEMOTONGAN']) && !empty($value)) {
+                return date('d-m-Y', strtotime($value));
+            }
+
+            return $value;
+        });
+
+        return $this->successResponse('Successfully Requested', $data);
+    }
+
+
+
     public function store(Request $request)
     {
 
@@ -75,10 +165,8 @@ class TaxPPh21Controller extends Controller
             $data[$dbColumn] = $request->input($requestKey);
         }
 
-        /*         print_r($data);
-        die; */
         $data['TGL_PEMOTONGAN'] = Carbon::now()->endOfMonth()->toDateString();
-        $data['TAHUN'] = 2005;
+        $data['TAHUN'] = 2025;
         // Simpan ke database
         TaxPPh21::create($data);
 

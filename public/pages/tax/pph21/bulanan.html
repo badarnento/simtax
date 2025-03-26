@@ -1,8 +1,8 @@
-<style>
-
-
-</style>
-<div class="panel">
+<div class="panel panel-listing d-none">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li class="breadcrumb-item"><a href="/#/">Home</a></li>
+        <li class="breadcrumb-item active">Masa Pajak PPh 21 BUlanan</li>
+    </ol>
     <header class="panel-heading">
         <h3 class="panel-title">Masa Pajak PPh 21 BUlanan</h3>
     </header>
@@ -384,10 +384,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-5 form-control-label"><strong>JUMLAH PENGHASILAN
-                                        TERATUR</strong></label>
+                                <label class="col-md-5 form-control-label"><strong>Jumlah Penghasilan
+                                        Teratur</strong></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control number-input disabled-input"
+                                    <input type="text" class="form-control number-input disabled-input input-total"
                                         id="jumlah_penghasilan_teratur" name="jumlah_penghasilan_teratur" />
                                 </div>
                             </div>
@@ -418,10 +418,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-5 form-control-label"><strong>JUMLAH PENGHASILAN TIDAK
-                                        TERATUR</strong></label>
+                                <label class="col-md-5 form-control-label"><strong>Jumlah Penghasilan Tidak
+                                        Teratur</strong></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control number-input disabled-input"
+                                    <input type="text" class="form-control number-input disabled-input input-total"
                                         id="jumlah_penghasilan_tidak_teratur" name="jumlah_penghasilan_tidak_teratur" />
                                 </div>
                             </div>
@@ -429,10 +429,10 @@
                         <div class="col-md-6">
                             <h4 class="font-weight-400">Penghasilan Bruto</h4>
                             <div class="form-group row">
-                                <label class="col-md-5 form-control-label"><strong>JUMLAH PENGHASILAN
-                                        BRUTO</strong></label>
+                                <label class="col-md-5 form-control-label"><strong>Jumlah Penghasilan
+                                        Bruto</strong></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control number-input disabled-input"
+                                    <input type="text" class="form-control number-input disabled-input input-total"
                                         id="jumlah_penghasilan_bruto" name="jumlah_penghasilan_bruto" />
                                 </div>
                             </div>
@@ -479,9 +479,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-5 form-control-label"><strong>JUMLAH PENGURANG</strong></label>
+                                <label class="col-md-5 form-control-label"><strong>Jumlah Pengurang</strong></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control number-input disabled-input"
+                                    <input type="text" class="form-control number-input disabled-input input-total"
                                         id="jumlah_pengurang" name="jumlah_pengurang" />
                                 </div>
                             </div>
@@ -523,6 +523,131 @@
         </form>
     </div>
 </div>
+
+
+<div class="card d-none panel-view">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li class="breadcrumb-item"><a href="/#/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/#/tax/pph21/bulanan">Masa Pajak PPh 21 BUlanan</a></li>
+        <li class="breadcrumb-item active breadcrumb_detail"></li>
+    </ol>
+    <div class="card-header bg-primary text-white">Detail Penghasilan Bulanan</div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>ID Masa Pajak</th>
+                    <td id="view_ID_MASA_PAJAK"></td>
+                </tr>
+                <tr>
+                    <th>Tanggal Pemotongan</th>
+                    <td id="view_TGL_PEMOTONGAN"></td>
+                </tr>
+                <tr>
+                    <th>Masa Pajak</th>
+                    <td id="view_MASA_PAJAK"></td>
+                </tr>
+                <tr>
+                    <th>Tahun Pajak</th>
+                    <td id="view_TAHUN_PAJAK"></td>
+                </tr>
+                <tr>
+                    <th>ID Pegawai</th>
+                    <td id="view_ID_PEGAWAI"></td>
+                </tr>
+                <tr>
+                    <th>Nama</th>
+                    <td id="view_NAMA"></td>
+                </tr>
+                <tr>
+                    <th>NIK</th>
+                    <td id="view_NIK"></td>
+                </tr>
+                <tr>
+                    <th>NPWP</th>
+                    <td id="view_NPWP"></td>
+                </tr>
+                <tr>
+                    <th>Kategori TER</th>
+                    <td id="view_KATEGORI_TER"></td>
+                </tr>
+                <tr>
+                    <th>Gaji Pokok</th>
+                    <td id="view_GAJI_POKOK"></td>
+                </tr>
+                <tr>
+                    <th>Uang Makan</th>
+                    <td id="view_UANG_MAKAN"></td>
+                </tr>
+                <tr>
+                    <th>Uang Lembur</th>
+                    <td id="view_UANG_LEMBUR"></td>
+                </tr>
+                <tr>
+                    <th>Tunjangan</th>
+                    <td id="view_TUNJANGAN"></td>
+                </tr>
+                <tr>
+                    <th>Tunjangan PPH</th>
+                    <td id="view_TUNJANGAN_PPH"></td>
+                </tr>
+                <tr>
+                    <th>THR</th>
+                    <td id="view_THR"></td>
+                </tr>
+                <tr>
+                    <th>Bonus</th>
+                    <td id="view_BONUS"></td>
+                </tr>
+                <tr>
+                    <th>Penghasilan Bruto</th>
+                    <td id="view_PENGHASILAN_BRUTO"></td>
+                </tr>
+                <tr>
+                    <th>Premi JKK</th>
+                    <td id="view_PREMI_JKK"></td>
+                </tr>
+                <tr>
+                    <th>Premi JKM</th>
+                    <td id="view_PREMI_JKM"></td>
+                </tr>
+                <tr>
+                    <th>Premi BPJS Kesehatan</th>
+                    <td id="view_PREMI_BPJS_KES"></td>
+                </tr>
+                <tr>
+                    <th>PPh21 Terutang</th>
+                    <td id="view_PPH21_TERUTANG"></td>
+                </tr>
+                <tr>
+                    <th>Zakat</th>
+                    <td id="view_ZAKAT"></td>
+                </tr>
+                <tr>
+                    <th>Iuran Pensiun</th>
+                    <td id="view_IURAN_PENSIUN"></td>
+                </tr>
+                <tr>
+                    <th>Iuran JHT</th>
+                    <td id="view_IURAN_JHT"></td>
+                </tr>
+                <tr>
+                    <th>Natura Objek PPh21</th>
+                    <td id="view_NATURA_OBJEK_PPH21"></td>
+                </tr>
+                <tr>
+                    <th>Tantiem dan Lainnya</th>
+                    <td id="view_TANTIEM_DAN_LAINNYA"></td>
+                </tr>
+                <tr>
+                    <th>Gross Up</th>
+                    <td id="view_GROSS_UP"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 <script src="../../../js/formatter.js"></script>
 <script src="../../../assets/js/pages/bulanan.js"></script>

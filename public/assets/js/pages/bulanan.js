@@ -1,5 +1,7 @@
 window.tarifPPh = [];
 
+let pphBulananURL = 'tax/pph21/bulanan';
+
 $(document).on(
     "change",
     "#gaji_pokok, #tunjangan, #uang_makan, #uang_lembur, #penghasilan_lain, #naturan_pph21, #premi_bpjs_kesehatan_percent, #metode_penggajian, [id^=premi_bpjs_tk_][id$=_percent]",
@@ -21,6 +23,7 @@ function updatePenghasilan() {
     setPremiBpjsTk();
     setJumlahPenghasilanTeratur();
     setJumlahPenghasilanBruto();
+    setJumlahPph21Terutang();
 }
 
 function updatePotonganPenghasilan() {
@@ -44,6 +47,7 @@ function setJumlahPenghasilanBruto() {
         "#jumlah_penghasilan_tidak_teratur",
     ]);
     $("#jumlah_penghasilan_bruto").val(formatNumber(bruto));
+    
 }
 
 function setJumlahPenghasilanTidakTeratur() {
@@ -68,9 +72,23 @@ function setJumlahPenghasilanTeratur() {
     let tunjangan_pph = (isGross === "0") ? 0 : hitungTunjanganPph;
 
     $("#tunjangan_pph").val(formatNumber(tunjangan_pph));
-    $("#jumlah_pph21_terutang").val(formatNumber(tunjangan_pph));
     
     $("#jumlah_penghasilan_teratur").val(formatNumber(total + tunjangan_pph));
+}
+
+function setJumlahPph21Terutang(){
+
+    let jumlah_penghasilan_bruto = parseNumber($("#jumlah_penghasilan_bruto").val());
+    console.log(jumlah_penghasilan_bruto);
+    let tarif = parsePercent($("#tarif_ter").val());
+    console.log(tarif);
+    let npwp = $("#npwp").val();
+    let jumlah_pph21_terutang = calculatePercentage(jumlah_penghasilan_bruto, tarif);
+    jumlah_pph21_terutang = (npwp == "-") ? calculatePercentage(jumlah_pph21_terutang, 120) : jumlah_pph21_terutang;
+    console.log(jumlah_pph21_terutang);
+
+    $("#jumlah_pph21_terutang").val(formatNumber(jumlah_pph21_terutang));
+
 }
 
 function hitungTunjanganPPh(totalPenghasilan) {
@@ -87,8 +105,6 @@ function hitungTunjanganPPh(totalPenghasilan) {
 
     $("#id_ter").val(tarifData.ID_TER || "");
 
-    console.log(tarifData.TARIF)
-    console.log(tarifData.LAPISAN)
     $("#tarif_ter").val(tarifData.TARIF);
     $("#kategori_ter").val(tarifData.LAPISAN);
 
@@ -111,7 +127,7 @@ function setPremiBpjsTk() {
 
 function updatePremi(id, gajiPokok) {
     let percent = parsePercent($(`#${id}_percent`).val());
-    let premi = calculatePremi(gajiPokok, percent);
+    let premi = calculatePercentage(gajiPokok, percent);
     $(`#${id}`).val(formatNumber(premi));
 
     if (id == "premi_bpjs_tk_jkk") {
@@ -121,13 +137,13 @@ function updatePremi(id, gajiPokok) {
     }
 
     percent = parsePercent($(`#premi_bpjs_kesehatan_percent`).val());
-    premi = calculatePremi(gajiPokok, percent);
+    premi = calculatePercentage(gajiPokok, percent);
     $(`#premi_bpjs_kesehatan`).val(formatNumber(premi));
     $(`#premi_bpjs_kesehatan_info`).val(formatNumber(premi));
 }
 function updateIuran(id, gajiPokok) {
     let percent = parsePercent($(`#${id}_percent`).val());
-    let iuran = calculatePremi(gajiPokok, percent);
+    let iuran = calculatePercentage(gajiPokok, percent);
     $(`#${id}`).val(formatNumber(iuran));
 
     if (id == "iuran_bpjs_tk_jht") {
@@ -137,12 +153,12 @@ function updateIuran(id, gajiPokok) {
     }
 
     percent = parsePercent($(`#iuran_bpjs_kesehatan_percent`).val());
-    iuran = calculatePremi(gajiPokok, percent);
+    iuran = calculatePercentage(gajiPokok, percent);
     $(`#iuran_bpjs_kesehatan`).val(formatNumber(iuran));
 }
 
-function calculatePremi(gajiPokok, percent) {
-    return (gajiPokok * percent) / 100;
+function calculatePercentage(amount, percent) {
+    return (amount * percent) / 100;
 }
 
 function sumValues(fields) {
@@ -194,22 +210,6 @@ function handleFormResponse(result) {
     }
 }
 
-let url = "/api/v1.0/tax/pph21/bulanan/list";
-let jsonData = [
-    { data: "no", width: "10px", class: "text-center" },
-    { data: "MASA_PAJAK" },
-    { data: "TAHUN_PAJAK", class: "text-center" },
-    { data: "NAMA", width: "100px" },
-    { data: "NIK", width: "100px" },
-    { data: "NPWP", width: "150px" },
-    { data: "KATEGORI_TER", class: "text-center" },
-    { data: "GROSS_UP", class: "text-center" },
-    { data: "GAJI_POKOK", class: "text-right" },
-    { data: "TUNJANGAN_PPH", class: "text-right" },
-    { data: "PENGHASILAN_BRUTO", class: "text-right" },
-];
-data_table(url, jsonData);
-
 $(document).ready(function () {
     setupEmployeeSelect();
     setupModalHandlers();
@@ -238,7 +238,7 @@ function setupEmployeeSelect() {
             $("#id_pegawai").val(data.ID_PEGAWAI);
             $("#nama").val(data.NAMA);
             $("#nik").val(data.NIK);
-            $("#npwp").val(data.NPWP || "");
+            $("#npwp").val(data.NPWP || "-");
             $("#status-ptkp").val(data.PTKP);
             Global.ajax(
                 `tax/pph21/get-tarif?id_pegawai=${data.ID_PEGAWAI}`,
@@ -274,3 +274,51 @@ function setupModalHandlers() {
 }
 
 
+function loadListingBulananPPh21(){
+
+    let url = `/api/v1.0/${pphBulananURL}/list`;
+
+    let jsonData = [
+        { data: "no", width: "10px", class: "text-center" },
+        { data: "MASA_PAJAK" },
+        { data: "TAHUN_PAJAK", class: "text-center" },
+        { data: "NAMA", width: "100px" },
+        { data: "NIK", width: "100px" },
+        { data: "NPWP", width: "150px" },
+        { data: "KATEGORI_TER", class: "text-center" },
+        { data: "GROSS_UP", class: "text-center" },
+        { data: "GAJI_POKOK", class: "text-right" },
+        { data: "TUNJANGAN_PPH", class: "text-right" },
+        { data: "PENGHASILAN_BRUTO", class: "text-right" },
+    ];
+    data_table(url, jsonData);
+}
+
+function viewDetailBulananPPh21(id_masa_pajak) {
+    Global.ajax(`${pphBulananURL}/${id_masa_pajak}`, "GET", null, (response) => {
+        renderViewBulananDetail(response.data);
+    });
+}
+function renderViewBulananDetail(data) {
+    $(".panel-view").removeClass('d-none');
+
+    Object.keys(data).forEach(key => {
+        Object.keys(data).forEach(key => {
+            if (document.getElementById('view_' + key)) {
+                document.getElementById('view_' + key).textContent = data[key];
+            }
+        });
+
+        $(".breadcrumb_detail").html(data.NAMA);
+
+    });
+}
+
+$('#table_data').on('dblclick','tr',function(e){
+    e.stopPropagation()                       
+    var data = table.row(this).data();
+    let redirectUrl = `${CONFIG.webUrl}/${pphBulananURL}?id=${data.ID_MASA_PAJAK}&action=view`;
+
+    window.location.href = redirectUrl;
+
+});

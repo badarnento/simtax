@@ -12,7 +12,8 @@ class MasaPajakPph21View extends Model
 
     protected $table = 'MASA_PAJAK_PPH21_VIEW';
 
-    protected $primaryKey = null;
+    // protected $primaryKey = null;
+    protected $primaryKey = 'ID_MASA_PAJAK';
 
     public $incrementing = false;
 

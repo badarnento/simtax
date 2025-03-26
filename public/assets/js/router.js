@@ -7,7 +7,7 @@ let firstInit = true;
 const Router = {
     routes: {},
     currentRoute: null,
-    callback: () => console.log("Home page loaded"),
+    currentParams: {},
 
     list: [
         {
@@ -20,36 +20,63 @@ const Router = {
             path: "/tax/pph21/bulanan",
             title: "Pajak PPh21 Bulanan",
             template: "tax/pph21/bulanan.html",
-            callback: function () {
-            },
+            callback: function(params) {
+                if (params.id) {
+                    switch (params.action) {
+                        case 'edit':
+                            return editDetailBUlananPPh21(params.id);
+                        case 'view':
+                            return viewDetailBulananPPh21(params.id);
+                        default:
+                            break;
+                    }
+                }
+                loadListingBulananPPh21();
+            }
         },
+/*         {
+            path: "/tax/pph21/bulanan",
+            title: "Pajak PPh21 Bulanan",
+            template: "tax/pph21/bulanan.html",
+            callback: function () {},
+        }, */
         {
             path: "/master/pegawai",
             title: "Master Pegawai",
             template: "master/pegawai.html",
-            callback: function () {
-            },
+            callback: function(params) {
+                if (params.id) {
+                    switch (params.action) {
+                        case 'edit':
+                            return loadEmployeeForEditing(params.id);
+                        case 'view':
+                            return displayEmployeeDetails(params.id);
+                        default:
+                            break;
+                    }
+                }
+                loadListing();
+            }
         },
+
+        
         {
             path: "/master/ptkp",
             title: "Master PTKP",
             template: "master/ptkp.html",
-            callback: function () {
-            },
+            callback: function () {},
         },
         {
             path: "/master/ter",
             title: "Master TER",
             template: "master/ter.html",
-            callback: function () {
-            },
+            callback: function () {},
         },
         {
             path: "/admin/users",
             title: "User Management",
             template: "admin/users.html",
-            callback: function () {
-            },
+            callback: function () {},
         },
     ],
 
@@ -74,23 +101,57 @@ const Router = {
     },
 
     /**
-     * Navigate to a specific route
-     * @param {string} hash - URL hash including the path
+     * Navigate to a route with optional parameters
+     * @param {string} path - Route path
+     * @param {object} params - Optional parameters to pass
      */
-    navigate(hash) {
-        const path = hash.substring(1) || "/";
-        this.currentRoute = path;
+    navigateWithParams(path, params = {}) {
+        // Convert params to query string
+        const queryString = Object.keys(params)
+            .map(
+                (key) =>
+                    `${encodeURIComponent(key)}=${encodeURIComponent(
+                        params[key]
+                    )}`
+            )
+            .join("&");
 
-        const route = this.routes[path];
-        route ? this.loadPage(route) : this.showNotFound();
+        // Update hash with optional query string
+        window.location.hash = path + (queryString ? `?${queryString}` : "");
     },
 
     /**
-     * Load page content based on route configuration
-     * @param {object} route - Route configuration object
+     * Enhanced navigate method to parse parameters
+     * @param {string} hash - URL hash including path and optional parameters
      */
-    loadPage(route) {
+    navigate(hash) {
+        // Split path and query string
+        const [pathWithoutParams, queryString] = hash.substring(1).split("?");
+        const path = pathWithoutParams || "/";
 
+        // Parse parameters
+        const params = {};
+        if (queryString) {
+            queryString.split("&").forEach((param) => {
+                const [key, value] = param.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+        }
+
+        // Store current route and params
+        this.currentRoute = path;
+        this.currentParams = params;
+
+        const route = this.routes[path];
+        route ? this.loadPage(route, params) : this.showNotFound();
+    },
+
+    /**
+     * Modified loadPage to accept parameters
+     * @param {object} route - Route configuration
+     * @param {object} params - Route parameters
+     */
+    loadPage(route, params = {}) {
         if (!firstInit) {
             Global.showLoading();
         }
@@ -101,8 +162,9 @@ const Router = {
             .done((content) => {
                 $("#app").html(content);
 
+                // Pass params to callback if exists
                 if (typeof route.callback === "function") {
-                    route.callback();
+                    route.callback(params);
                 }
 
                 this.updateActiveNav();

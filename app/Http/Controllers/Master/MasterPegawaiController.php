@@ -15,7 +15,6 @@ class MasterPegawaiController extends Controller
 
     public function index(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'q' => 'nullable|string|max:100'
         ]);
@@ -36,6 +35,13 @@ class MasterPegawaiController extends Controller
         }
 
         $data = $query->limit(10)->get();
+
+        return $this->successResponse('Successfully Requested', $data);
+    }
+
+    public function show(MasterPegawai $pegawai)
+    {
+        $data = $pegawai;
 
         return $this->successResponse('Successfully Requested', $data);
     }
