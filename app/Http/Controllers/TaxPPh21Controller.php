@@ -131,8 +131,6 @@ class TaxPPh21Controller extends Controller
         return $this->successResponse('Successfully Requested', $data);
     }
 
-
-
     public function store(Request $request)
     {
 
@@ -155,6 +153,11 @@ class TaxPPh21Controller extends Controller
             'tantiem' => 'TANTIEM_DAN_LAINNYA',
             'bulan_awal' => 'BULAN',
             'metode_penggajian' => 'GROSS_UP',
+            'iuran_zakat' => 'ZAKAT',
+            'jumlah_pph21_terutang' => 'PPH21_TERUTANG',
+            'iuran_bpjs_tk_jht' => 'IURAN_JHT',
+            'iuran_bpjs_tk_jp' => 'IURAN_PENSIUN',
+            'kategori_ter' => 'KATEGORI_TER',
             'jumlah_penghasilan_bruto' => 'PENGHASILAN_BRUTO',
         ];
 
