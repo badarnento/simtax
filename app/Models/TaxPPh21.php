@@ -114,6 +114,14 @@ class TaxPPh21 extends BaseModel
     {
         $this->setAttributeValues('THR', $value);
     }
+    public function setZakatAttribute($value)
+    {
+        $this->setAttributeValues('ZAKAT', $value);
+    }
+    public function setPph21TerutangAttribute($value)
+    {
+        $this->setAttributeValues('PPH21_TERUTANG', $value);
+    }
     public function setPenghasilanBrutoAttribute($value)
     {
         $this->setAttributeValues('PENGHASILAN_BRUTO', $value);
