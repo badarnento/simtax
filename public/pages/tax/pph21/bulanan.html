@@ -1,24 +1,30 @@
-<div class="panel">
+<div class="panel panel-listing d-none">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li class="breadcrumb-item"><a href="/#/">Home</a></li>
+        <li class="breadcrumb-item active">Masa Pajak PPh 21 BUlanan</li>
+    </ol>
     <header class="panel-heading">
-        <div class="panel-actions pt-10">
-            <button id="button-add" class="btn btn-primary" data-target="#modal-select-employee" data-toggle="modal"
-                type="button">
-                Input Data
-            </button>
-        </div>
         <h3 class="panel-title">Masa Pajak PPh 21 BUlanan</h3>
     </header>
     <div class="panel-body">
-        <table class="table table-bordered table-striped table-responsive w-full" cellspacing="0" id="table_data">
+        <div class="row">
+            <div class="col-md-10">
+                <input id="tbl_search" class="input-field px-20 form-control input-sm border-radius-5" type="search"
+                    placeholder="Search here...">
+            </div>
+            <div class="col-md-2">
+                <button id="button-add" class="btn btn-primary waves-effect waves-classic w-full"
+                    data-target="#modal-select-employee" data-toggle="modal" type="button">
+                    <i class="icon md-receipt" aria-hidden="true"></i> Buat Baru
+                </button>
+            </div>
+        </div>
+        <table class="table table-striped table-responsive w-full table-hover" id="table_data">
             <thead>
                 <tr>
                     <th>No.</th>
-                    <!-- <th>ID_MASA_PAJAK</th> -->
-                    <!-- <th>ID_PEGAWAI</th> -->
-                    <!-- <th>Id ter</th> -->
-                    <!-- <th class="text-center">Tanggal Pemotongan</th> -->
-                    <th class="text-center">Masa Pajak</th>
-                    <th class="text-center">Tahun Pajak</th>
+                    <th class="text-center">Bulan</th>
+                    <th class="text-center">Tahun</th>
                     <th class="text-center">NAMA</th>
                     <th class="text-center">NIK</th>
                     <th class="text-center">NPWP</th>
@@ -33,22 +39,16 @@
     </div>
 </div>
 
-<style>
-    .premi-bpjs {
-        cursor: pointer;
-    }
-</style>
-
 
 <div class="modal fade" id="modal-select-employee" aria-hidden="true" aria-labelledby="modalSelectEmployeeLabel"
     role="dialog">
     <div class="modal-dialog modal-simple">
         <form class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Pilih Pegawai</h4>
+                <h4 class="modal-title white">Pilih Pegawai</h4>
             </div>
             <div class="modal-body">
                 <div class="panel-body">
@@ -63,7 +63,6 @@
     </div>
 </div>
 
-
 <div class="modal modal-slide-from-bottom" id="modal-premi-bpjs" aria-hidden="true"
     aria-labelledby="modalPremiBPJSLabel" role="dialog">
     <div class="modal-dialog modal-simple">
@@ -76,7 +75,6 @@
             </div>
             <div class="modal-body">
                 <div class="panel-body">
-
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label">BPJS TK JHT</label>
                         <div class="col-md-3">
@@ -136,7 +134,64 @@
                                 name="premi_bpjs_kesehatan" readonly />
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-warning">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
 
+
+<div class="modal modal-slide-from-bottom" id="modal-iuran-bpjs" aria-hidden="true"
+    aria-labelledby="modalPremiBPJSLabel" role="dialog">
+    <div class="modal-dialog modal-simple">
+        <form id="form-iuran-bpjs" class="modal-content form-horizontal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Pemotongan Iuran Bpjs Oleh Karyawan</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel-body">
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label">BPJS TK JHT</label>
+                        <div class="col-md-3">
+                            <input type="text" id="iuran_bpjs_tk_jht_percent" name="iuran_bpjs_tk_jht_percent"
+                                class="form-control w-full percent-input" placeholder="0,00 %" autocomplete="off" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control w-full number-input" id="iuran_bpjs_tk_jht"
+                                name="iuran_bpjs_tk_jht" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label">BPJS TK JP</label>
+                        <div class="col-md-3">
+                            <input type="text" id="iuran_bpjs_tk_jp_percent" class="form-control w-full percent-input"
+                                placeholder="0,00 %" autocomplete="off" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control w-full number-input" id="iuran_bpjs_tk_jp"
+                                name="iuran_bpjs_tk_jp" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label">BPJS Kesehatan</label>
+                        <div class="col-md-3">
+                            <input type="text" id="iuran_bpjs_kesehatan_percent"
+                                class="form-control w-full percent-input" placeholder="0,00 %" autocomplete="off" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control w-full number-input" id="iuran_bpjs_kesehatan"
+                                name="iuran_bpjs_kesehatan" readonly />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -150,17 +205,19 @@
 <div class="modal fade" id="modal-edit" aria-hidden="true" aria-labelledby="modalEditLabel" role="dialog">
     <div class="modal-dialog modal-simple modal-lg modal-scrollable">
         <form id="form-edit" class="modal-content form-horizontal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Input Masa Pajak Bulanan PPh 21</h4>
+                <h4 class="modal-title white">Input Masa Pajak Bulanan PPh 21</h4>
             </div>
             <div class="modal-body">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <h4 class="font-weight-500 sub-title-form">Data Karyawan</h4>
+                            <h4 class="font-weight-500 sub-title-form">
+                                Data Karyawan
+                            </h4>
                         </div>
 
                         <div class="col-md-6">
@@ -198,21 +255,6 @@
                                         <option value="11">November</option>
                                         <option value="12">Desember</option>
                                     </select>
-                                    <!--                            <span class="px-2 align-self-center">s.d.</span>
-                                    <select class="form-control col-md-8" id="bulan-akhir" name="bulan-akhir">
-                                        <option value="1">Januari</option>
-                                        <option value="2">Februari</option>
-                                        <option value="3">Maret</option>
-                                        <option value="4">April</option>
-                                        <option value="5">Mei</option>
-                                        <option value="6">Juni</option>
-                                        <option value="7">Juli</option>
-                                        <option value="8">Agustus</option>
-                                        <option value="9">September</option>
-                                        <option value="10">Oktober</option>
-                                        <option value="11">November</option>
-                                        <option value="12">Desember</option>
-                                    </select> -->
                                     <span class="px-2 align-self-center font-weight-500">2025</span>
                                 </div>
                             </div>
@@ -252,9 +294,7 @@
                             </h4>
                         </div>
                         <div class="col-md-6">
-                            <h4 class="font-weight-400">
-                                Penghasilan Teratur
-                            </h4>
+                            <h4 class="font-weight-400">Penghasilan Teratur</h4>
                             <div class="form-group row">
                                 <label class="col-md-5 form-control-label">Gaji Pokok</label>
                                 <div class="col-md-6">
@@ -308,7 +348,9 @@
                                     <input type="hidden" class="form-control number-input premi-bpjs"
                                         id="premi_bpjs_jht" />
                                     <input type="text" class="form-control number-input premi-bpjs" id="premi_bpjs_jkk"
-                                        name="premi_bpjs_jkk" readonly />
+                                        name="premi_bpjs_jkk" title="Click to edit" readonly />
+                                    <button type="button" class="btn btn-icon btn-default btn-premi-bpjs-edit"><i
+                                            class="icon md-edit" aria-hidden="true" title="Click to edit"></i></button>
                                 </div>
                             </div>
 
@@ -316,7 +358,9 @@
                                 <label class="col-md-5 form-control-label">Premi BPJSTK JKM</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control number-input premi-bpjs" id="premi_bpjs_jkm"
-                                        name="premi_bpjs_jkm" readonly />
+                                        name="premi_bpjs_jkm" title="Click to edit" readonly />
+                                    <button type="button" class="btn btn-icon btn-default btn-premi-bpjs-edit"><i
+                                            class="icon md-edit" aria-hidden="true" title="Click to edit"></i></button>
                                 </div>
                             </div>
 
@@ -324,7 +368,10 @@
                                 <label class="col-md-5 form-control-label">Premi BPJS Kesehatan</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control number-input premi-bpjs"
-                                        id="premi_bpjs_kesehatan_info" name="premi_bpjs_kesehatan" readonly />
+                                        id="premi_bpjs_kesehatan_info" name="premi_bpjs_kesehatan" title="Click to edit"
+                                        readonly />
+                                    <button type="button" class="btn btn-icon btn-default btn-premi-bpjs-edit"><i
+                                            class="icon md-edit" aria-hidden="true" title="Click to edit"></i></button>
                                 </div>
                             </div>
 
@@ -337,14 +384,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-5 form-control-label"><strong>JUMLAH PENGHASILAN
-                                        TERATUR</strong></label>
+                                <label class="col-md-5 form-control-label"><strong>Jumlah Penghasilan
+                                        Teratur</strong></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control number-input disabled-input"
+                                    <input type="text" class="form-control number-input disabled-input input-total"
                                         id="jumlah_penghasilan_teratur" name="jumlah_penghasilan_teratur" />
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-md-6">
                             <h4 class="font-weight-400">
@@ -372,25 +418,96 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-5 form-control-label"><strong>JUMLAH PENGHASILAN TIDAK
-                                        TERATUR</strong></label>
+                                <label class="col-md-5 form-control-label"><strong>Jumlah Penghasilan Tidak
+                                        Teratur</strong></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control number-input disabled-input"
-                                        id="jumlah_penghasilan_tidak_teratur" name="jumlah_penghasilan_tidak_teratur"
-                                         />
+                                    <input type="text" class="form-control number-input disabled-input input-total"
+                                        id="jumlah_penghasilan_tidak_teratur" name="jumlah_penghasilan_tidak_teratur" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <h4 class="font-weight-400">
-                                Penghasilan Bruto
-                            </h4>
+                            <h4 class="font-weight-400">Penghasilan Bruto</h4>
                             <div class="form-group row">
-                                <label class="col-md-5 form-control-label"><strong>JUMLAH PENGHASILAN
-                                        BRUTO</strong></label>
+                                <label class="col-md-5 form-control-label"><strong>Jumlah Penghasilan
+                                        Bruto</strong></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control number-input disabled-input"
-                                        id="jumlah_penghasilan_bruto" name="jumlah_penghasilan_bruto"  />
+                                    <input type="text" class="form-control number-input disabled-input input-total"
+                                        id="jumlah_penghasilan_bruto" name="jumlah_penghasilan_bruto" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spacer-10"></div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4 class="font-weight-500 sub-title-form text-center">
+                                Pengurang
+                            </h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="font-weight-400">Iuran PPh</h4>
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Iuran Zakat</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="iuran_zakat"
+                                        name="iuran_zakat" required />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Iuran Pensiun (BPJS TK JP)</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input iuran-bpjs"
+                                        id="iuran_pensiun_bpjs_tk_jp" name="iuran_pensiun_bpjs_tk_jp"
+                                        title="Click to edit" readonly />
+                                    <button type="button" class="btn btn-icon btn-default btn-iuran-bpjs-edit"><i
+                                            class="icon md-edit" aria-hidden="true" title="Click to edit"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Iuran Jaminan Hari Tua (BPJS TK JHT)</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input iuran-bpjs"
+                                        id="iuran_pensiun_bpjs_tk_jht" name="iuran_pensiun_bpjs_tk_jht"
+                                        title="Click to edit" readonly />
+                                    <button type="button" class="btn btn-icon btn-default btn-iuran-bpjs-edit"><i
+                                            class="icon md-edit" aria-hidden="true" title="Click to edit"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label"><strong>Jumlah Pengurang</strong></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input disabled-input input-total"
+                                        id="jumlah_pengurang" name="jumlah_pengurang" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="font-weight-400">PPh 21 Terutang</h4>
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Tarif Efektif Rata-rata (TER) Bulanan</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="tarif_ter" name="tarif_ter"
+                                        readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">Kategori Ter</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="kategori_ter"
+                                        name="kategori_ter" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5 form-control-label">PPh Pasal 21 Terutang Bulan ini</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control number-input" id="jumlah_pph21_terutang"
+                                        name="jumlah_pph21_terutang" readonly />
                                 </div>
                             </div>
                         </div>
@@ -398,306 +515,139 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                <button type="submit" class="btn btn-primary w-200">
+                    <i class="icon md-check-circle" aria-hidden="true"></i> Submit
+                </button>
                 <!-- <button type="reset" class="btn btn-warning">Reset</button> -->
             </div>
         </form>
     </div>
 </div>
 
-<script>
 
-    let formDataPremi = {};
-    window.tarifPPh = [];
+<div class="card d-none panel-view">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li class="breadcrumb-item"><a href="/#/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/#/tax/pph21/bulanan">Masa Pajak PPh 21 BUlanan</a></li>
+        <li class="breadcrumb-item active breadcrumb_detail"></li>
+    </ol>
+    <div class="card-header bg-primary text-white">Detail Penghasilan Bulanan</div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>ID Masa Pajak</th>
+                    <td id="view_ID_MASA_PAJAK"></td>
+                </tr>
+                <tr>
+                    <th>Tanggal Pemotongan</th>
+                    <td id="view_TGL_PEMOTONGAN"></td>
+                </tr>
+                <tr>
+                    <th>Masa Pajak</th>
+                    <td id="view_MASA_PAJAK"></td>
+                </tr>
+                <tr>
+                    <th>Tahun Pajak</th>
+                    <td id="view_TAHUN_PAJAK"></td>
+                </tr>
+                <tr>
+                    <th>ID Pegawai</th>
+                    <td id="view_ID_PEGAWAI"></td>
+                </tr>
+                <tr>
+                    <th>Nama</th>
+                    <td id="view_NAMA"></td>
+                </tr>
+                <tr>
+                    <th>NIK</th>
+                    <td id="view_NIK"></td>
+                </tr>
+                <tr>
+                    <th>NPWP</th>
+                    <td id="view_NPWP"></td>
+                </tr>
+                <tr>
+                    <th>Kategori TER</th>
+                    <td id="view_KATEGORI_TER"></td>
+                </tr>
+                <tr>
+                    <th>Gaji Pokok</th>
+                    <td id="view_GAJI_POKOK"></td>
+                </tr>
+                <tr>
+                    <th>Uang Makan</th>
+                    <td id="view_UANG_MAKAN"></td>
+                </tr>
+                <tr>
+                    <th>Uang Lembur</th>
+                    <td id="view_UANG_LEMBUR"></td>
+                </tr>
+                <tr>
+                    <th>Tunjangan</th>
+                    <td id="view_TUNJANGAN"></td>
+                </tr>
+                <tr>
+                    <th>Tunjangan PPH</th>
+                    <td id="view_TUNJANGAN_PPH"></td>
+                </tr>
+                <tr>
+                    <th>THR</th>
+                    <td id="view_THR"></td>
+                </tr>
+                <tr>
+                    <th>Bonus</th>
+                    <td id="view_BONUS"></td>
+                </tr>
+                <tr>
+                    <th>Penghasilan Bruto</th>
+                    <td id="view_PENGHASILAN_BRUTO"></td>
+                </tr>
+                <tr>
+                    <th>Premi JKK</th>
+                    <td id="view_PREMI_JKK"></td>
+                </tr>
+                <tr>
+                    <th>Premi JKM</th>
+                    <td id="view_PREMI_JKM"></td>
+                </tr>
+                <tr>
+                    <th>Premi BPJS Kesehatan</th>
+                    <td id="view_PREMI_BPJS_KES"></td>
+                </tr>
+                <tr>
+                    <th>PPh21 Terutang</th>
+                    <td id="view_PPH21_TERUTANG"></td>
+                </tr>
+                <tr>
+                    <th>Zakat</th>
+                    <td id="view_ZAKAT"></td>
+                </tr>
+                <tr>
+                    <th>Iuran Pensiun</th>
+                    <td id="view_IURAN_PENSIUN"></td>
+                </tr>
+                <tr>
+                    <th>Iuran JHT</th>
+                    <td id="view_IURAN_JHT"></td>
+                </tr>
+                <tr>
+                    <th>Natura Objek PPh21</th>
+                    <td id="view_NATURA_OBJEK_PPH21"></td>
+                </tr>
+                <tr>
+                    <th>Tantiem dan Lainnya</th>
+                    <td id="view_TANTIEM_DAN_LAINNYA"></td>
+                </tr>
+                <tr>
+                    <th>Gross Up</th>
+                    <td id="view_GROSS_UP"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-    $(document).on("change", "#gaji_pokok, #tunjangan, #uang_makan, #uang_lembur, #penghasilan_lain, #naturan_pph21, #premi_bpjs_kesehatan_percent, [id^=premi_bpjs_tk_][id$=_percent]", function () {
-        setPremiBpjsTk();
-        setJumlahPenghasilanTeratur();
-        setJumlahPenghasilanBruto();
-    });
-
-    $(document).on("change", "#tunjangan_hari_raya, #bonus, #tantiem", function () {
-        setJumlahPenghasilanTidakTeratur();
-    });
-
-    function setJumlahPenghasilanBruto() {
-        let penghasilanTeratur = parseNumber($("#jumlah_penghasilan_teratur").val());
-        let penghasilanTidakTeratur = parseNumber($("#jumlah_penghasilan_tidak_teratur").val());
-
-        let jumlah_penghasilan_bruto = penghasilanTeratur + penghasilanTidakTeratur;
-
-
-        $("#jumlah_penghasilan_bruto").val(formatNumber(jumlah_penghasilan_bruto));
-
-    }
-    function setJumlahPenghasilanTidakTeratur() {
-        let total = 0;
-
-        let fields = [
-            "#tunjangan_hari_raya",
-            "#bonus",
-            "#tantiem",
-        ];
-
-        fields.forEach(id => {
-            total += parseNumber($(id).val());
-        });
-
-        $("#jumlah_penghasilan_tidak_teratur").val(formatNumber(total));
-    }
-
-    function setJumlahPenghasilanTeratur() {
-        let total = 0;
-
-        let fields = [
-            "#gaji_pokok",
-            "#tunjangan",
-            "#uang_makan",
-            "#uang_lembur",
-            "#penghasilan_lain",
-            // "#premi_bpjs_jht",
-            "#premi_bpjs_jkk",
-            "#premi_bpjs_jkm",
-            "#premi_bpjs_kesehatan",
-            "#naturan_pph21"
-        ];
-
-        fields.forEach(id => {
-            total += parseNumber($(id).val());
-        });
-
-        let tunjangan_pph = hitungTunjanganPPh(total);
-
-        total += tunjangan_pph;
-
-        $("#tunjangan_pph").val(formatNumber(tunjangan_pph));
-        $("#jumlah_penghasilan_teratur").val(formatNumber(total));
-    }
-
-    function hitungTunjanganPPh(totalPenghasilanTeratur) {
-        if (!totalPenghasilanTeratur) {
-            return null;
-        }
-
-        if (!window.tarifPPh.length) {
-            console.warn("Data tarif PPh belum dimuat!");
-            return null;
-        }
-
-        let getTarifTER = window.tarifPPh.find(item =>
-            totalPenghasilanTeratur >= item.PENGHASILAN_MIN && totalPenghasilanTeratur <= item.PENGHASILAN_MAX
-        ) || null;
-
-        let tarifTER = getTarifTER.TARIF;
-
-        let idTER = getTarifTER.ID_TER;
-        $("#id_ter").val(idTER);
-
-        let tarif = parseFloat(tarifTER);
-
-        if (tarif > 1) {
-            tarif /= 100;
-        }
-
-        let A = totalPenghasilanTeratur * tarif;
-
-        let tunjanganPPh = A / (1 - tarif);
-
-        tunjanganPPh = Math.floor(tunjanganPPh);
-
-        return tunjanganPPh;
-    }
-
-
-    function getTarifByPenghasilan(penghasilan) {
-        if (!window.tarifPPh.length) {
-            console.warn("Data tarif PPh belum dimuat!");
-            return null;
-        }
-
-        return window.tarifPPh.find(item =>
-            penghasilan >= item.PENGHASILAN_MIN && penghasilan <= item.PENGHASILAN_MAX
-        ) || null;
-    }
-
-    function setPremiBpjsTk() {
-        let gajiPokok = parseNumber($("#gaji_pokok").val());
-
-        ["jht", "jkk", "jkm", "jp"].forEach(type => {
-            let percent = parsePercent($(`#premi_bpjs_tk_${type}_percent`).val());
-            let premi = calculatePremi(gajiPokok, percent);
-
-            $(`#premi_bpjs_tk_${type}`).val(formatNumber(premi));
-
-            if (type == 'jkk') {
-                $(`#premi_bpjs_jkk`).val(formatNumber(premi));
-            } else if (type == 'jkm') {
-                $(`#premi_bpjs_jkm`).val(formatNumber(premi));
-            }
-        });
-
-        let percent = parsePercent($(`#premi_bpjs_kesehatan_percent`).val());
-        let premi = calculatePremi(gajiPokok, percent);
-        $(`#premi_bpjs_kesehatan`).val(formatNumber(premi));
-        $(`#premi_bpjs_kesehatan_info`).val(formatNumber(premi));
-
-    }
-
-    function calculatePremi(gajiPokok, percentValue) {
-        return (gajiPokok * percentValue) / 100;
-    }
-
-    function parseNumber(value) {
-        if (!value) return 0;
-        return parseFloat(value.replace(/\./g, '').trim()) || 0;
-    }
-
-    function parsePercent(value) {
-        if (!value) return 0;
-        return parseFloat(value.replace(',', '.').replace('%', '').trim()) || 0;
-    }
-
-    function formatNumber(value) {
-        return value.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
-
-    $("#form-premi-bpjs").on("submit", function (e) {
-        e.preventDefault();
-        $("#modal-premi-bpjs").modal("hide");
-    });
-
-    $("#form-edit").on("submit", function (e) {
-        e.preventDefault();
-
-        let form = $("#form-edit")[0];
-        let formData = new FormData(form);
-
-        Global.ajax(
-            "tax/pph21/bulanan",
-            "POST",
-            formData,
-            function (result) {
-
-                if (result.type == "success") {
-                    reloadTable();
-                    Global.toastNotif(result.message);
-                    $("#modal-edit").modal("hide");
-                    form.reset();
-                } else {
-                    Global.toastNotif(result.message);
-                }
-            },
-            function (xhr, status, error) {
-                console.error("Error:", error);
-            }
-        );
-    });
-</script>
-
-
-<script>
-    url = "/api/v1.0/tax/pph21/bulanan/list";
-    jsonData = [
-        { data: "no", width: "10px", class: "text-center" },
-        /* { data: "ID_MASA_PAJAK"},
-        { data: "ID_PEGAWAI"},
-        { data: "ID TER"}, */
-        { data: "MASA_PAJAK" },
-        { data: "TAHUN_PAJAK" },
-        { data: "NAMA", width: "80%" },
-        { data: "NIK" },
-        { data: "NPWP" },
-        { data: "KATEGORI_TER" },
-        { data: "GROSS_UP" },
-        { data: "GAJI_POKOK" },
-        { data: "TUNJANGAN_PPH" },
-        { data: "PENGHASILAN_BRUTO" }
-    ];
-    data_table(url, jsonData);
-</script>
-<script>
-    $(document).ready(function () {
-        $("#employee-select").select2({
-            placeholder: "Ketik Nama atau NIK",
-            width: "100%",
-            ajax: {
-                url: "/api/v1.0/master/pegawai",
-                dataType: "json",
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results: data.data.map((item) => ({
-                            id: item.ID_PEGAWAI,
-                            text: `${item.NAMA} - ${item.NIK}`,
-                            data: item,
-                        })),
-                    };
-                },
-            },
-        });
-
-
-        $("#employee-select").on("select2:select", function (e) {
-            let selectedData = e.params.data.data;
-
-            $("#id_pegawai").val(selectedData.ID_PEGAWAI);
-            $("#nama").val(selectedData.NAMA);
-            $("#nik").val(selectedData.NIK);
-            $("#npwp").val(selectedData.NPWP || "");
-            $("#status-ptkp").val(selectedData.PTKP);
-
-            Global.ajax(
-                `tax/pph21/get-tarif?id_pegawai=${selectedData.ID_PEGAWAI}`,
-                "GET",
-                null,
-                function (result) {
-                    if (result.type === "success") {
-                        window.tarifPPh = result.data;
-                        console.log("Tarif PPh berhasil dimuat:", window.tarifPPh);
-                    } else {
-                        console.error("Gagal mengambil tarif PPh:", result.message);
-                    }
-                }
-            );
-
-            $("#modal-select-employee").modal("hide");
-            $("#modal-edit").modal("show");
-        });
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-        let inputPercent = document.getElementById("percent");
-
-        inputPercent.addEventListener("input", function () {
-            let value = parseFloat(inputPercent.value);
-
-            if (isNaN(value) || value < 0) {
-                inputPercent.value = 0;
-            } else if (value > 100) {
-                inputPercent.value = 100;
-            } else {
-                inputPercent.value = value.toFixed(2);
-            }
-        });
-    });
-</script>
 
 <script src="../../../js/formatter.js"></script>
-
-<script>
-    $(document).ready(function () {
-
-        $(".premi-bpjs").on("click", function () {
-            console.log('clicked')
-
-            $('#modal-edit').modal('hide');
-            $('#modal-premi-bpjs').modal('show');
-
-        });
-
-        $('#modal-premi-bpjs').on('hidden.bs.modal', function () {
-            $('#modal-edit').modal('show');
-        });
-    });
-
-</script>
+<script src="../../../assets/js/pages/bulanan.js"></script>

@@ -38,7 +38,7 @@ function getCookie(name) {
 
 function reloadTable(id = "table_data") {
     let table = $(`#${id}`).DataTable();
-    
+
     if ($.fn.DataTable.isDataTable(`#${id}`)) {
         if (table.ajax) {
             table.ajax.reload(null, false);
@@ -48,22 +48,20 @@ function reloadTable(id = "table_data") {
     }
 }
 
+let table;
 
 function data_table(url, json) {
     let token = getCookie("token");
 
+    $(".panel-listing").removeClass("d-none");
     Global.checkToken();
-
-    let table = $("#table_data").DataTable({
+    
+    table = $("#table_data").DataTable({
         serverSide: true,
         processing: true,
         ajax: {
             url: url,
             type: "GET",
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-            // data: function (d) {},
             data: function (d) {
                 d.draw = d.draw || 0; // Tambahkan draw untuk request
             },
@@ -72,7 +70,6 @@ function data_table(url, json) {
                 return json.data || [];
             },
         },
-
         language: {
             emptyTable:
                 "<span class ='label label-danger'>Data not found!</span>",
@@ -81,6 +78,15 @@ function data_table(url, json) {
                 '<div class="loader vertical-align-middle loader-circle"></div>',
             search: "_INPUT_",
         },
+        drawCallback: function () {
+            $(".dataTables_paginate ul.pagination").addClass(
+                "pagination pagination-gap"
+            );
+        },
+        fnDrawCallback: function () {
+            $("#table_data_length").prepend($("#table_data_info"));
+        },
+        dom: '<"top"i>rt<"bottom"flp><"clear">',
         columns: json,
         scrollY: 500,
         scrollCollapse: true,
@@ -90,6 +96,8 @@ function data_table(url, json) {
         bAutoWidth: true,
         autoWidth: true,
     });
+
+    $("#table_data_filter").remove();
 
     // Fungsi debounce untuk pencarian
     /*     $('#table_data_filter input').on('input', function () {
@@ -118,6 +126,10 @@ function data_table(url, json) {
                 table.search("").draw();
             }
         });
+
+    $(document).on("change", "#tbl_search", function () {
+        table.search($(this).val()).draw();
+    });
 
     table.columns.adjust().draw();
 

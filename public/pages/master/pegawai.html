@@ -1,8 +1,13 @@
-<div class="panel">
+<div class="panel d-none panel-listing">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li class="breadcrumb-item"><a href="/#/">Home</a></li>
+        <li class="breadcrumb-item active"><a href="/#/master/pegawai">Master Pegawai</a></li>
+    </ol>
     <header class="panel-heading">
         <div class="panel-actions pt-10">
-            <button id="button-add" class="btn btn-primary" data-target="#modal-edit" data-toggle="modal"
-                type="button"><i class="icon md-account-add" aria-hidden="true"></i> Tambah</button>
+            <button id="button-add" class="btn btn-primary" data-target="#modal-edit" data-toggle="modal" type="button">
+                <i class="icon md-account-add" aria-hidden="true"></i> Tambah
+            </button>
         </div>
         <h3 class="panel-title">Data Pegawai</h3>
     </header>
@@ -37,37 +42,137 @@
                 </tr>
             </thead>
         </table>
+    </div>
+</div>
 
+<div class="card d-none panel-view">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li class="breadcrumb-item"><a href="/#/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/#/master/pegawai">Master Pegawai</a></li>
+        <li class="breadcrumb-item active breadcrumb_detail"></li>
+    </ol>
+    <div class="card-header bg-primary text-white">
+        Employee Details
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>ID Pegawai</th>
+                    <td id="ID_PEGAWAI"></td>
+                </tr>
+                <tr>
+                    <th>Nama</th>
+                    <td id="NAMA"></td>
+                </tr>
+                <tr>
+                    <th>Jenis Kelamin</th>
+                    <td id="JENIS_KELAMIN"></td>
+                </tr>
+                <tr>
+                    <th>Jabatan</th>
+                    <td id="JABATAN"></td>
+                </tr>
+                <tr>
+                    <th>NIK</th>
+                    <td id="NIK"></td>
+                </tr>
+                <tr>
+                    <th>NPWP</th>
+                    <td id="NPWP"></td>
+                </tr>
+                <tr>
+                    <th>Alamat</th>
+                    <td id="ALAMAT"></td>
+                </tr>
+                <tr>
+                    <th>Status Pegawai</th>
+                    <td id="STATUS_PEGAWAI"></td>
+                </tr>
+                <tr>
+                    <th>Deskripsi Status</th>
+                    <td id="DESKRIPSI_STATUS_PEGAWAI"></td>
+                </tr>
+                <tr>
+                    <th>Nama Fasilitas</th>
+                    <td id="NAMA_FASILITAS"></td>
+                </tr>
+                <tr>
+                    <th>Dokumen Referensi</th>
+                    <td id="NAMA_DOKUMEN_REFERENSI"></td>
+                </tr>
+                <tr>
+                    <th>Nomor Dokumen</th>
+                    <td id="NOMOR_DOKUMEN_REFERENSI"></td>
+                </tr>
+                <tr>
+                    <th>Tanggal Dokumen</th>
+                    <td id="TGL_DOKUMEN_REFERENSI"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
 <script>
-    url = "/api/v1.0/master/pegawai/list";
-    jsonData = [
-        { data: "no", "width": "10px", class: "text-center" },
-        { data: "ID_KODE_OBJEK_PPH21", "visible": false },
-        { data: "NAMA", "width": "200%" },
-        { data: "JENIS_KELAMIN" },
-        { data: "JABATAN" },
-        { data: "NIK" },
-        { data: "TKU_PENERIMA_PENGHASILAN" },
-        { data: "PTKP" },
-        // { data: "ALAMAT", "width": "250px" },
-        { data: "STATUS_KARYAWAN_RESIDENCE" },
-        { data: "NO_PASSPORT" },
-        { data: "NEGARA" },
-        { data: "KODE_NEGARA" },
-        { data: "BULAN_AWAL_PENGHASILAN" },
-        { data: "BULAN_AKHIR_PENGHASILAN" },
-        { data: "LAMA_BEKERJA" },
-        { data: "STATUS_PEGAWAI" },
-        // { data: "DESKRIPSI_STATUS_PEGWAI", "width": "250px"  },
-        { data: "KODE_FASILITAS" },
-        { data: "NAMA_FASILITAS" },
-        { data: "KODE_DOKUMEN" },
-        { data: "NAMA_DOKUMEN_REFERENSI" },
-        { data: "NOMOR_DOKUMEN_REFERENSI" },
-        { data: "TGL_DOKUMEN_REFERENSI" },
-    ];
-    data_table(url, jsonData);
+    let masterPegawaiURL = 'master/pegawai';
+    function loadListing() {
+        url = `/api/v1.0/${masterPegawaiURL}/list`;
+        jsonData = [
+            { data: "no", width: "10px", class: "text-center" },
+            { data: "ID_KODE_OBJEK_PPH21", visible: false },
+            { data: "NAMA", width: "150px" },
+            { data: "JENIS_KELAMIN" },
+            { data: "JABATAN" },
+            { data: "NIK" },
+            { data: "TKU_PENERIMA_PENGHASILAN" },
+            { data: "PTKP" },
+            // { data: "ALAMAT", "width": "250px" },
+            { data: "STATUS_KARYAWAN_RESIDENCE" },
+            { data: "NO_PASSPORT" },
+            { data: "NEGARA" },
+            { data: "KODE_NEGARA" },
+            { data: "BULAN_AWAL_PENGHASILAN" },
+            { data: "BULAN_AKHIR_PENGHASILAN" },
+            { data: "LAMA_BEKERJA" },
+            { data: "STATUS_PEGAWAI" },
+            // { data: "DESKRIPSI_STATUS_PEGWAI", "width": "250px"  },
+            { data: "KODE_FASILITAS" },
+            { data: "NAMA_FASILITAS" },
+            { data: "KODE_DOKUMEN" },
+            { data: "NAMA_DOKUMEN_REFERENSI" },
+            { data: "NOMOR_DOKUMEN_REFERENSI" },
+            { data: "TGL_DOKUMEN_REFERENSI" },
+        ];
+        data_table(url, jsonData);
+    }
+
+    function loadEmployeeForEditing(employeeId) {
+        console.log("edit " + employeeId);
+    }
+
+    function displayEmployeeDetails(employeeId) {
+        Global.ajax(`master/pegawai/${employeeId}`, "GET", null, (response) => {
+            renderEmployeeDetails(response.data);
+        });
+    }
+    function renderEmployeeDetails(data) {
+        $(".panel-view").removeClass('d-none');
+
+        Object.keys(data).forEach(key => {
+            if (document.getElementById(key)) {
+                document.getElementById(key).textContent = data[key];
+            }
+        });
+        $(".breadcrumb_detail").html(data.NAMA);
+    }
+
+    $('#table_data').on('dblclick','tr',function(e){
+        e.stopPropagation()                       
+        var data = table.row(this).data();
+        let redirectUrl = `${CONFIG.webUrl}/${masterPegawaiURL}?id=${data.ID_PEGAWAI}&action=view`;
+
+        window.location.href = redirectUrl;
+
+    });
 </script>
