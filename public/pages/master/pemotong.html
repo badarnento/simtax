@@ -1,0 +1,153 @@
+<div class="panel panel-listing">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li class="breadcrumb-item"><a href="/#/">Home</a></li>
+        <li class="breadcrumb-item active"><a href="/#/master/pemotong">Master Pemotong</a></li>
+    </ol>
+    <header class="panel-heading">
+        <div class="panel-actions pt-10">
+            <button id="button-add" class="btn btn-primary" data-target="#modal-edit" data-toggle="modal" type="button">
+                <i class="icon md-account-add" aria-hidden="true"></i> Tambah
+            </button>
+        </div>
+        <h3 class="panel-title">Data Pemotong</h3>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped table-responsive w-full" cellspacing="0" id="table_data">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th class="text-center">ID_PEMOTONG</th>
+                    <th class="text-center">NAMA_PEMOTONG</th>
+                    <th class="text-center">NPWP_PEMOTONG</th>
+                    <th class="text-center">TKU_PEMOTONG</th>
+                    <th class="text-center">ALAMAT_PEMOTONG</th>
+                    <th class="text-center">KOTA</th>
+                    <th class="text-center">NO_TLP</th>
+                    <th class="text-center">NAMA_PENANDATANGAN</th>
+                    <th class="text-center">NPWP_PENANDATANGAN</th>
+                    <th class="text-center">NIK_PENANDATANGAN</th>
+                    <th class="text-center">METODE_PPH21</th>
+                    <th class="text-center">TAHUN_PAJAK_PERHITUNGAN</th>
+                   
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<div class="card d-none panel-view">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li class="breadcrumb-item"><a href="/#/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/#/master/pemotong">Master Pemotong</a></li>
+        <li class="breadcrumb-item active breadcrumb_detail"></li>
+    </ol>
+    <div class="card-header bg-primary text-white">
+        Pemotong Details
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>ID Pemotong</th>
+                    <td id="ID_PEMOTONG"></td>
+                </tr>
+                <tr>
+                    <th>Nama Pemotong</th>
+                    <td id="NAMA_PEMOTONG"></td>
+                </tr>
+                <tr>
+                    <th>NPWP Pemotong</th>
+                    <td id="NPWP_PEMOTONG"></td>
+                </tr>
+                <tr>
+                    <th>TKU Pemotong</th>
+                    <td id="TKU_PEMOTONG"></td>
+                </tr>
+                <tr>
+                    <th>Alamat Pemotong</th>
+                    <td id="ALAMAT_PEMOTONG"></td>
+                </tr>
+                <tr>
+                    <th>KOTA</th>
+                    <td id="KOTA"></td>
+                </tr>
+                <tr>
+                    <th>No Telepon</th>
+                    <td id="NO_TLP"></td>
+                </tr>
+                <tr>
+                    <th>Nama Penandatangan</th>
+                    <td id="NAMA_PENANDATANGAN"></td>
+                </tr>
+                <tr>
+                    <th>NPWP Penandatangan</th>
+                    <td id="NPWP_PENANDATANGAN"></td>
+                </tr>
+                <tr>
+                    <th>NIK Penandatangan</th>
+                    <td id="NIK_PENANDATANGAN"></td>
+                </tr>
+                <tr>
+                    <th>Metode PPH21</th>
+                    <td id="METODE_PPH21"></td>
+                </tr>
+                <tr>
+                    <th>Tahun Pajak Perhitungan</th>
+                    <td id="TAHUN_PAJAK_PERHITUNGAN"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    let masterPemotongURL = 'master/pemotong';
+    function loadListing() {
+        url = `/api/v1.0/${masterPemotongURL}/list`;
+        jsonData = [
+            { data: "no", width: "10px", class: "text-center" },
+            { data: "ID_PEMOTONG", visible: false },
+            { data: "NAMA_PEMOTONG", width: "150px" },
+            { data: "NPWP_PEMOTONG" },
+            { data: "TKU_PEMOTNG" },
+            { data: "ALAMAT_PEMOTONG" },
+            { data: "KOTA" },
+            { data: "NO_TLP" },
+            { data: "NAMA_PENANDATANGAN" },
+            { data: "NPWP_PENANDATANGAN" },
+            { data: "NIK_PENANDATANGAN" },
+            { data: "METODE_PPH21" },
+            { data: "TAHUN_PAJAK_PERHITUNGAN" },
+        ];
+        data_table(url, jsonData);
+    }
+
+    function loadPemotongForEditing(pemotongId) {
+        console.log("edit " + pemotongId);
+    }
+
+    function displayPemotongDetails(pemotongId) {
+        Global.ajax(`master/pemotong/${pemotongId}`, "GET", null, (response) => {
+            renderPemotonhDetails(response.data);
+        });
+    }
+    function renderPemotongDetails(data) {
+        $(".panel-view").removeClass('d-none');
+
+        Object.keys(data).forEach(key => {
+            if (document.getElementById(key)) {
+                document.getElementById(key).textContent = data[key];
+            }
+        });
+        $(".breadcrumb_detail").html(data.NAMA_PEMOTONG);
+    }
+
+    $('#table_data').on('dblclick','tr',function(e){
+        e.stopPropagation()                       
+        var data = table.row(this).data();
+        let redirectUrl = `${CONFIG.webUrl}/${masterPemotongURL}?id=${data.ID_PEMOTONG}&action=view`;
+
+        window.location.href = redirectUrl;
+
+    });
+</script>

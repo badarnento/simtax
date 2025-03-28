@@ -7,6 +7,8 @@ use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\Master\MasterTERController;
 use App\Http\Controllers\Master\MasterPegawaiController;
 use App\Http\Controllers\Master\MasterPTKPController;
+use App\Http\Controllers\Master\MasterKodeObjekPPH21Controller;
+use App\Http\Controllers\Master\MasterPemotongController;
 use App\Http\Controllers\TaxPPh21Controller;
 
 /*
@@ -47,10 +49,14 @@ Route::prefix('v1.0')->group(function () {
             Route::get('pegawai/list', [MasterPegawaiController::class, 'getListing']);
             Route::get('ptkp/list', [MasterPTKPController::class, 'getListing']);
             Route::get('ter/list', [MasterTERController::class, 'getListing']);
+            Route::get('pemotong/list', [MasterPemotongController::class, 'getListing']);
+            Route::get('kode-objek-pph21/list', [MasterKodeObjekPPH21Controller::class, 'getListing']);
 
             Route::apiResource('pegawai', MasterPegawaiController::class);
             Route::apiResource('ptkp', MasterPTKPController::class);
             Route::apiResource('ter', MasterTERController::class);
+            Route::apiResource('pemotong', MasterPemotongController::class);
+            Route::apiResource('kode-objek-pph21', MasterKodeObjekPPH21Controller::class);
         });
     });
 });

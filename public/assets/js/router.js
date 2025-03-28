@@ -58,6 +58,43 @@ const Router = {
                 loadListing();
             }
         },
+        {
+            path: "/master/pemotong",
+            title: "Master pemotong",
+            template: "master/pemotong.html",
+            callback: function(params) {
+                if (params.id) {
+                    switch (params.action) {
+                        case 'edit':
+                            return loadPemotongForEditing(params.id);
+                        case 'view':
+                            return displayPemotongDetails(params.id);
+                        default:
+                            break;
+                    }
+                }
+                loadListing();
+            }
+        },
+
+        {
+            path: "/master/kode-objek-pph21",
+            title: "Master Kode Objek PPH21",
+            template: "master/kodeobjekpph21.html",
+            callback: function(params) {
+                if (params.id) {
+                    switch (params.action) {
+                        case 'edit':
+                            return loadKodeObjekPPH21ForEditing(params.id);
+                        case 'view':
+                            return displayKodeObjekPPH21Details(params.id);
+                        default:
+                            break;
+                    }
+                }
+                loadListing();
+            }
+        },
 
         
         {
